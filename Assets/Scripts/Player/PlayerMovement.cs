@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
             input.Normalize();
         }
 
-        Vector3 move = Vector3.zero;
+        Vector3 move;
 
         if (cameraTransform != null)
         {
