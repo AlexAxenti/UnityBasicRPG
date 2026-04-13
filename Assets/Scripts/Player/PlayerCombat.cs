@@ -9,6 +9,13 @@ public class PlayerCombat : MonoBehaviour
     
     private float lastAttackTime;
 
+    private Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     void Update()
     {
         Mouse mouse = Mouse.current;
@@ -16,16 +23,21 @@ public class PlayerCombat : MonoBehaviour
         if (mouse != null && mouse.leftButton.wasPressedThisFrame && Time.time >= lastAttackTime + attackCooldown)   
         {
             lastAttackTime = Time.time;
-            Ray ray = new Ray(transform.position + Vector3.up, transform.forward);
+            animator.SetTrigger("Attack");
+        }
+    }
 
-            if (Physics.Raycast(ray, out RaycastHit hit, attackRange))
+    public void onAttackHitFrame()
+    {
+        Ray ray = new Ray(transform.position + Vector3.up, transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, attackRange))
+        {
+            EnemyHealth enemy = hit.collider.GetComponentInParent<EnemyHealth>();
+
+            if (enemy != null)
             {
-                EnemyHealth enemy = hit.collider.GetComponentInParent<EnemyHealth>();
-
-                if (enemy != null)
-                {
-                    enemy.TakeDamage(damage);
-                }
+                enemy.TakeDamage(damage);
             }
         }
     }
