@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7157d086c2193f4d994e829bbf9aa49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthUI
-  playerHealth: {fileID: 868640643}
+  characterHealth: {fileID: 8311042423211246210}
   healthFillImage: {fileID: 9029594}
 --- !u!1 &133369821
 GameObject:
@@ -799,17 +799,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &868640643 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7922226971409225250, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
-  m_PrefabInstance: {fileID: 8311042423211246207}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e43ef99190f98764b83ce57acf1b7196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!1 &905708915
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,11 +969,72 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4733648439648759024, guid: e39cb86ab82d6674aac06f088f77aa95, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1802467558904152243, guid: e39cb86ab82d6674aac06f088f77aa95, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 2192525037664012157}
+    - targetCorrespondingSourceObject: {fileID: 1802467558904152243, guid: e39cb86ab82d6674aac06f088f77aa95, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2192525037664012156}
+    - targetCorrespondingSourceObject: {fileID: 1802467558904152243, guid: e39cb86ab82d6674aac06f088f77aa95, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2192525037664012161}
   m_SourcePrefab: {fileID: 100100000, guid: e39cb86ab82d6674aac06f088f77aa95, type: 3}
+--- !u!1 &2192525037664012155 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1802467558904152243, guid: e39cb86ab82d6674aac06f088f77aa95, type: 3}
+  m_PrefabInstance: {fileID: 2192525037664012154}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2192525037664012156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2192525037664012155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0ae0447fb2f93e4799c30f214cfa178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterStats
+  maxHealth: 50
+  damage: 10
+  attackRange: 1.5
+  armor: 5
+  movementSpeed: 3
+--- !u!114 &2192525037664012157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2192525037664012155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2ebcc6d610e7ff4b90a63a526e4967a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterHealth
+  canRegenerateHealth: 0
+  healthRegenAmount: 5
+  healthRegenInterval: 2
+--- !u!114 &2192525037664012161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2192525037664012155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e17a79536e9f5b4881a2cb74f1cd828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterInfo
+  characterName: Goblin
+  factionType: 1
 --- !u!1001 &8311042423211246207
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1034,6 +1084,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7525548591987857849, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
+      propertyPath: cameraFollow
+      value: 
+      objectReference: {fileID: 330585548}
+    - target: {fileID: 7525548591987857849, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 330585546}
@@ -1041,11 +1095,72 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7922226971409225250, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8038328745804696601, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8311042423211246210}
+    - targetCorrespondingSourceObject: {fileID: 8038328745804696601, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8311042423211246209}
+    - targetCorrespondingSourceObject: {fileID: 8038328745804696601, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8311042423211246216}
   m_SourcePrefab: {fileID: 100100000, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
+--- !u!1 &8311042423211246208 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8038328745804696601, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
+  m_PrefabInstance: {fileID: 8311042423211246207}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8311042423211246209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8311042423211246208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0ae0447fb2f93e4799c30f214cfa178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterStats
+  maxHealth: 100
+  damage: 10
+  attackRange: 1.5
+  armor: 5
+  movementSpeed: 5
+--- !u!114 &8311042423211246210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8311042423211246208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2ebcc6d610e7ff4b90a63a526e4967a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterHealth
+  canRegenerateHealth: 1
+  healthRegenAmount: 5
+  healthRegenInterval: 2
+--- !u!114 &8311042423211246216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8311042423211246208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e17a79536e9f5b4881a2cb74f1cd828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterInfo
+  characterName: Player
+  factionType: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

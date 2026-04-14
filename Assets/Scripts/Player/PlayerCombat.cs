@@ -1,21 +1,28 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.TextCore.Text;
 
 public class PlayerCombat : MonoBehaviour
 {
-    [SerializeField] private float attackRange = 2f;
-    [SerializeField] private int damage = 10;
     [SerializeField] private float attackCooldown = 0.5f;
     
     private float lastAttackTime;
     private bool attackWindowOpen;
     private bool hasHitThisSwing;
+    private CharacterStats characterStats;
 
     private Animator animator;
 
     private void Awake()
     {
+        characterStats = GetComponent<CharacterStats>();
         animator = GetComponent<Animator>();
+
+        if (characterStats == null)
+        {
+            Debug.LogError("CharacterStats component not found on " + gameObject.name);
+            
+        }
     }
 
     private void Update()
@@ -60,15 +67,19 @@ public class PlayerCombat : MonoBehaviour
         if (Physics.Raycast(
             ray, 
             out RaycastHit hit, 
-            attackRange, 
+            characterStats.AttackRange, 
             Physics.DefaultRaycastLayers, 
             QueryTriggerInteraction.Ignore))
         {
-            EnemyHealth enemy = hit.collider.GetComponentInParent<EnemyHealth>();
+            CharacterInfo hitInfo = hit.collider.GetComponentInParent<CharacterInfo>();
+            if (hitInfo == null || hitInfo.FactionType != FactionType.Enemy)
+                return;
+
+            CharacterHealth enemy = hit.collider.GetComponentInParent<CharacterHealth>();
 
             if (enemy != null)
             {
-                enemy.TakeDamage(damage);
+                enemy.TakeDamage(characterStats.Damage);
                 hasHitThisSwing = true;
             }
         }

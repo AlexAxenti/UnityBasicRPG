@@ -3,14 +3,15 @@ using UnityEngine.UI;
 
 public class PlayerHealthUI : MonoBehaviour
 {
-    [SerializeField] private PlayerHealth playerHealth;
+    //TODO serializefield or get component in parent?
+    [SerializeField] private CharacterHealth characterHealth;
     [SerializeField] private Image healthFillImage;
 
     private void Update()
     {
-        if (playerHealth == null || healthFillImage == null) return;
+        if (characterHealth == null || healthFillImage == null) return;
 
-        float healthPercent = (float)playerHealth.CurrentHealth / playerHealth.MaxHealth;
+        float healthPercent = (float)characterHealth.CurrentHealth / characterHealth.MaxHealth;
         healthFillImage.fillAmount = healthPercent;
     }
 }

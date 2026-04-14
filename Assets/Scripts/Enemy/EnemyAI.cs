@@ -2,24 +2,31 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 2f;
-    [SerializeField] private float attackRange = 1.5f;
-    [SerializeField] private int damage = 10;
     [SerializeField] private float attackCooldown = 1f;
+    private CharacterStats characterStats;
 
-    private Transform playerTransform;
-    private PlayerHealth playerHealth;
+    private Transform targetTransform;
+    private CharacterHealth targetHealth;
     private float lastAttackTime;
+
+    private void Awake()
+    {
+        characterStats = GetComponent<CharacterStats>();
+        if (characterStats == null)
+        {
+            Debug.LogError("CharacterStats component not found on " + gameObject.name);
+        }
+    }
 
     private void Update()
     {
-        if (playerTransform == null) return;
+        if (targetTransform == null) return;
 
-        float distance = Vector3.Distance(transform.position, playerTransform.position);
+        float distance = Vector3.Distance(transform.position, targetTransform.position);
 
-        if (distance > attackRange)
+        if (distance > characterStats.AttackRange)
         {
-            MoveTowardPlayer();
+            MoveTowardTarget();
         }
         else
         {
@@ -27,12 +34,12 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    private void MoveTowardPlayer()
+    private void MoveTowardTarget()
     {
-        Vector3 direction = (playerTransform.position - transform.position).normalized;
+        Vector3 direction = (targetTransform.position - transform.position).normalized;
         direction.y = 0f;
 
-        transform.position += direction * moveSpeed * Time.deltaTime;
+        transform.position += direction * characterStats.MovementSpeed * Time.deltaTime;
 
         if (direction != Vector3.zero)
         {
@@ -46,30 +53,34 @@ public class EnemyAI : MonoBehaviour
 
         lastAttackTime = Time.time;
 
-        if (playerHealth != null)
+        if (targetHealth != null)
         {
-            playerHealth.TakeDamage(damage);
-            Debug.Log("Enemy attacked player");
+            targetHealth.TakeDamage(characterStats.Damage);
+            Debug.Log("Enemy attacked target");
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerHealth foundHealth = other.GetComponentInParent<PlayerHealth>();
+        CharacterInfo foundInfo = other.GetComponentInParent<CharacterInfo>();
+        if (foundInfo == null || foundInfo.FactionType != FactionType.Player)
+            return;
+        
+        CharacterHealth foundHealth = other.GetComponentInParent<CharacterHealth>();
         if (foundHealth != null)
         {
-            playerHealth = foundHealth;
-            playerTransform = foundHealth.transform.root;
+            targetHealth = foundHealth;
+            targetTransform = foundHealth.transform.root;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        PlayerHealth foundHealth = other.GetComponentInParent<PlayerHealth>();
-        if (foundHealth != null && playerTransform == foundHealth.transform.root)
+        CharacterHealth foundHealth = other.GetComponentInParent<CharacterHealth>();
+        if (foundHealth != null && targetTransform == foundHealth.transform.root)
         {
-            playerTransform = null;
-            playerHealth = null;
+            targetTransform = null;
+            targetHealth = null;
         }
     }
 }

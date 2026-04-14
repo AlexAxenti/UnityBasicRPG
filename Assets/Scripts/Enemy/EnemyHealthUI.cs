@@ -4,23 +4,38 @@ using UnityEngine.UI;
 
 public class EnemyHealthUI : MonoBehaviour
 {
-    [SerializeField] private EnemyHealth enemyHealth;
     [SerializeField] private TMP_Text enemyNameText;
     [SerializeField] private Image healthFillImage;
 
-    private void Start()
+    private CharacterHealth characterHealth;
+    private CharacterInfo characterInfo;
+
+  void Awake()
+  {
+    if (characterHealth == null)
     {
-        if (enemyHealth != null && enemyNameText != null)
+        characterHealth = GetComponentInParent<CharacterHealth>();
+    }
+
+    if (characterInfo == null)
+    {
+        characterInfo = GetComponentInParent<CharacterInfo>();
+    }
+  }
+
+  private void Start()
+    {
+        if (characterInfo != null && enemyNameText != null)
         {
-            enemyNameText.text = enemyHealth.EnemyName;
+            enemyNameText.text = characterInfo.CharacterName;
         }
     }
 
     private void Update()
     {
-        if (enemyHealth == null || healthFillImage == null) return;
+        if (characterHealth == null || healthFillImage == null) return;
 
-        float healthPercent = (float)enemyHealth.CurrentHealth / enemyHealth.MaxHealth;
+        float healthPercent = (float)characterHealth.CurrentHealth / characterHealth.MaxHealth;
         healthFillImage.fillAmount = healthPercent;
     }
 }

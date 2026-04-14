@@ -4,17 +4,22 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private CameraFollow cameraFollow;
 
+    private CharacterStats characterStats;
     private CharacterController controller;
     private float yVelocity = 0f;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
+        characterStats = GetComponent<CharacterStats>();
+        if (characterStats == null)
+        {
+            Debug.LogError("CharacterStats component not found on " + gameObject.name);
+        }
     }
 
     private void Update()
@@ -68,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
 
         yVelocity += gravity * Time.deltaTime;
 
-        Vector3 velocity = move * moveSpeed;
+        Vector3 velocity = move * characterStats.MovementSpeed;
         velocity.y = yVelocity;
 
         controller.Move(velocity * Time.deltaTime);
