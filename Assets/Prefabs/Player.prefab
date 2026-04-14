@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2574441146887625593}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.55, y: 0, z: 0}
   m_LocalScale: {x: 0.27923, y: 1, z: 0.42106}
   m_ConstrainProportionsScale: 0
@@ -448,8 +448,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 5
   gravity: -9.81
-  rotationSpeed: 10
   cameraTransform: {fileID: 0}
+  cameraFollow: {fileID: 0}
 --- !u!114 &6506570850150215115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,7 +489,7 @@ Animator:
   m_GameObject: {fileID: 8038328745804696601}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4e6e6f5935df20e4f8a12cceb73096c2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -530,7 +530,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -0.445, z: 1.6}
-  m_LocalScale: {x: 0.45, y: 2, z: 0.125}
+  m_LocalScale: {x: 0.55, y: 2, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6866865514378210404}

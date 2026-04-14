@@ -6,37 +6,49 @@ public class CameraFollow : MonoBehaviour
     public Transform target;
 
     [Header("Distance / Height")]
-    public float distance = 6f;
-    public float height = 2f;
+    [SerializeField] private float distance = 6f;
+    [SerializeField] private float height = 2f;
 
     [Header("Rotation")]
-    public float mouseSensitivity = 0.15f;
-    public float minPitch = -20f;
-    public float maxPitch = 60f;
+    [SerializeField] private float mouseSensitivity = 0.15f;
+    [SerializeField] private float minPitch = -20f;
+    [SerializeField] private float maxPitch = 60f;
 
     private float yaw = 0f;
     private float pitch = 20f;
 
-    void Start()
+    public float Yaw => yaw;
+
+    private void Start()
     {
         if (target != null)
         {
             yaw = target.eulerAngles.y;
         }
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
-    void LateUpdate()
+    private void Update()
+{
+    if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
     {
-        if (target == null || Mouse.current == null) return;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+}
 
-        if (Mouse.current.rightButton.isPressed)
-        {
-            Vector2 mouseDelta = Mouse.current.delta.ReadValue();
+    private void LateUpdate()
+    {
+        if (target == null || Mouse.current == null)
+            return;
 
-            yaw += mouseDelta.x * mouseSensitivity;
-            pitch -= mouseDelta.y * mouseSensitivity;
-            pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
-        }
+        Vector2 mouseDelta = Mouse.current.delta.ReadValue();
+
+        yaw += mouseDelta.x * mouseSensitivity;
+        pitch -= mouseDelta.y * mouseSensitivity;
+        pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
 
         Quaternion rotation = Quaternion.Euler(pitch, yaw, 0f);
 
@@ -45,5 +57,14 @@ public class CameraFollow : MonoBehaviour
 
         transform.position = targetPosition + cameraOffset;
         transform.LookAt(targetPosition);
+    }
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if (hasFocus)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 }

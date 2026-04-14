@@ -4,20 +4,20 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float gravity = -9.81f;
-    public float rotationSpeed = 10f;
-    public Transform cameraTransform;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private CameraFollow cameraFollow;
 
     private CharacterController controller;
     private float yVelocity = 0f;
 
-    void Awake()
+    private void Awake()
     {
         controller = GetComponent<CharacterController>();
     }
 
-    void Update()
+    private void Update()
     {
         Vector2 input = Vector2.zero;
 
@@ -34,7 +34,9 @@ public class PlayerMovement : MonoBehaviour
             input.Normalize();
         }
 
-        Vector3 move;
+        RotatePlayerToCameraYaw();
+
+        Vector3 move = Vector3.zero;
 
         if (cameraTransform != null)
         {
@@ -59,16 +61,6 @@ public class PlayerMovement : MonoBehaviour
             move.Normalize();
         }
 
-        if (move.magnitude > 0.01f)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(move);
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation,
-                targetRotation,
-                rotationSpeed * Time.deltaTime
-            );
-        }
-
         if (controller.isGrounded && yVelocity < 0f)
         {
             yVelocity = -2f;
@@ -80,5 +72,23 @@ public class PlayerMovement : MonoBehaviour
         velocity.y = yVelocity;
 
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void RotatePlayerToCameraYaw()
+    {
+        if (cameraFollow != null)
+        {
+            transform.rotation = Quaternion.Euler(0f, cameraFollow.Yaw, 0f);
+        }
+        else if (cameraTransform != null)
+        {
+            Vector3 forward = cameraTransform.forward;
+            forward.y = 0f;
+
+            if (forward.sqrMagnitude > 0.001f)
+            {
+                transform.rotation = Quaternion.LookRotation(forward);
+            }
+        }
     }
 }
