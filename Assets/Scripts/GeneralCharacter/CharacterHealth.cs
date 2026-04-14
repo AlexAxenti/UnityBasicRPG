@@ -5,16 +5,19 @@ public class CharacterHealth : MonoBehaviour
 {
     private CharacterInfo characterInfo;
     private CharacterStats characterStats;
-    private float maxHealth;
     private float currentHealth;
 
+    //TODO move to seperate regen component later
     [SerializeField] private bool canRegenerateHealth = false;
     [SerializeField] private float healthRegenAmount = 5f;
     [SerializeField] private float healthRegenInterval = 2f;
     private float regenTimer = 0f;
 
     public float CurrentHealth => currentHealth;
-    public float MaxHealth => maxHealth;
+    public float MaxHealth => characterStats != null ? characterStats.MaxHealth : 0f;
+
+    //TODO move later
+    private ExperienceReward experienceReward;
 
     private void Awake()
     {
@@ -22,15 +25,15 @@ public class CharacterHealth : MonoBehaviour
         characterStats = GetComponent<CharacterStats>();
         if (characterStats != null)
         {
-            maxHealth = characterStats.MaxHealth;
-            currentHealth = maxHealth;
+            currentHealth = characterStats.MaxHealth;
         }
         else
         {
             Debug.LogError("CharacterStats component not found on " + gameObject.name);
-            maxHealth = 100;
-            currentHealth = maxHealth;
+            currentHealth = 100;
         }
+
+        experienceReward = GetComponent<ExperienceReward>();
     }
 
     private void Update()
@@ -44,7 +47,7 @@ public class CharacterHealth : MonoBehaviour
         if (!canRegenerateHealth)
             return;
 
-        if (currentHealth >= maxHealth || currentHealth <= 0)
+        if (currentHealth >= characterStats.MaxHealth || currentHealth <= 0)
         {
             regenTimer = 0f;
             return;
@@ -63,7 +66,7 @@ public class CharacterHealth : MonoBehaviour
     public void Heal(float amount)
     {
         currentHealth += amount;
-        currentHealth = Mathf.Min(currentHealth, maxHealth);
+        currentHealth = Mathf.Min(currentHealth, characterStats.MaxHealth);
 
         Debug.Log($"{characterInfo.CharacterName} healed to {currentHealth}");
     }
@@ -83,7 +86,19 @@ public class CharacterHealth : MonoBehaviour
 
     private void Die()
     {
+        AwardExperience();
+
         Debug.Log($"{characterInfo.CharacterName} died");
         Destroy(gameObject);
+    }
+
+    private void AwardExperience()
+    {
+        if (experienceReward == null) return;
+
+        PlayerProgression playerProgression = FindAnyObjectByType<PlayerProgression>();
+        if (playerProgression == null) return;
+
+        playerProgression.GainExperience(experienceReward.ExperienceAmount);
     }
 }

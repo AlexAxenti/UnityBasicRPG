@@ -333,9 +333,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1365347089982376962}
-  - component: {fileID: 4733648439648759024}
   - component: {fileID: 1103952820730509705}
+  - component: {fileID: 1508866129876658663}
+  - component: {fileID: 9203855962816241644}
+  - component: {fileID: 7818936171479423017}
   - component: {fileID: 2014612672871913263}
+  - component: {fileID: 2173890841491599525}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -360,21 +363,6 @@ Transform:
   - {fileID: 5746750130892592898}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4733648439648759024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1802467558904152243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fb38cddb41aea140932967766ba9add, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  enemyName: Goblin
-  maxHealth: 50
-  currentHealth: 50
 --- !u!135 &1103952820730509705
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -396,6 +384,57 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1508866129876658663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802467558904152243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e17a79536e9f5b4881a2cb74f1cd828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterInfo
+  characterName: Goblin
+  factionType: 1
+  experienceReward: 25
+--- !u!114 &9203855962816241644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802467558904152243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0ae0447fb2f93e4799c30f214cfa178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterStats
+  level: 1
+  baseMaxHealth: 50
+  baseDamage: 10
+  baseAttackRange: 1.5
+  baseArmor: 5
+  baseMovementSpeed: 3
+  maxHealthPerLevel: 10
+  damagePerLevel: 2
+  armorPerLevel: 1
+--- !u!114 &7818936171479423017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802467558904152243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2ebcc6d610e7ff4b90a63a526e4967a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterHealth
+  canRegenerateHealth: 0
+  healthRegenAmount: 5
+  healthRegenInterval: 2
 --- !u!114 &2014612672871913263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,10 +447,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74e1e0f26da1f5b4bb323109349018e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  moveSpeed: 2
-  attackRange: 1.5
-  damage: 10
   attackCooldown: 1
+--- !u!114 &2173890841491599525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802467558904152243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e82e262246227cd4e890ebd88073e0f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExperienceReward
+  experienceAmount: 25
 --- !u!1 &1910618689580537667
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,7 +834,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aa1b4351cb66eb44acf63076a89baa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealthUI
-  enemyHealth: {fileID: 4733648439648759024}
   enemyNameText: {fileID: 2250572071554824760}
   healthFillImage: {fileID: 1342943834500850498}
 --- !u!114 &3780381228973535227

@@ -382,10 +382,13 @@ GameObject:
   m_Component:
   - component: {fileID: 872548807408351170}
   - component: {fileID: 8270198965290179745}
+  - component: {fileID: 1732744380540543179}
+  - component: {fileID: 5216188741730961191}
+  - component: {fileID: 4639909205902079521}
+  - component: {fileID: 4845192882909206868}
   - component: {fileID: 7525548591987857849}
   - component: {fileID: 6506570850150215115}
-  - component: {fileID: 7922226971409225250}
-  - component: {fileID: 1732744380540543179}
+  - component: {fileID: 5396636225462630862}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -434,51 +437,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7525548591987857849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8038328745804696601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fb56594acb22fb43ae482dfe7dadaec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  moveSpeed: 5
-  gravity: -9.81
-  cameraTransform: {fileID: 0}
-  cameraFollow: {fileID: 0}
---- !u!114 &6506570850150215115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8038328745804696601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67fea7caacc61374b82c16651ca2141e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  attackRange: 2
-  damage: 10
-  attackCooldown: 0.5
---- !u!114 &7922226971409225250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8038328745804696601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e43ef99190f98764b83ce57acf1b7196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  maxHealth: 100
-  currentHealth: 100
 --- !u!95 &1732744380540543179
 Animator:
   serializedVersion: 7
@@ -501,6 +459,99 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5216188741730961191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8038328745804696601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e17a79536e9f5b4881a2cb74f1cd828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterInfo
+  characterName: Player
+  factionType: 0
+  experienceReward: 25
+--- !u!114 &4639909205902079521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8038328745804696601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0ae0447fb2f93e4799c30f214cfa178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterStats
+  level: 1
+  baseMaxHealth: 100
+  baseDamage: 10
+  baseAttackRange: 1.5
+  baseArmor: 5
+  baseMovementSpeed: 5
+  maxHealthPerLevel: 10
+  damagePerLevel: 2
+  armorPerLevel: 1
+--- !u!114 &4845192882909206868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8038328745804696601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2ebcc6d610e7ff4b90a63a526e4967a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterHealth
+  canRegenerateHealth: 1
+  healthRegenAmount: 5
+  healthRegenInterval: 2
+--- !u!114 &7525548591987857849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8038328745804696601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fb56594acb22fb43ae482dfe7dadaec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  gravity: -9.81
+  cameraTransform: {fileID: 0}
+  cameraFollow: {fileID: 0}
+--- !u!114 &6506570850150215115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8038328745804696601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67fea7caacc61374b82c16651ca2141e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  attackCooldown: 0.5
+--- !u!114 &5396636225462630862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8038328745804696601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b9a26def8501824791fae448cea442b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerProgression
+  currentExperience: 0
+  experienceToNextLevel: 100
 --- !u!1 &8797247654112325981
 GameObject:
   m_ObjectHideFlags: 0

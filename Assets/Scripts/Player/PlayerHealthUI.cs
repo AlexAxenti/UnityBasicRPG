@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class PlayerHealthUI : MonoBehaviour
 {
-    //TODO serializefield or get component in parent?
     [SerializeField] private CharacterHealth characterHealth;
     [SerializeField] private Image healthFillImage;
 
