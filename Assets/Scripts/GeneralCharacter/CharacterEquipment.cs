@@ -3,9 +3,9 @@ using UnityEngine;
 public class CharacterEquipment : MonoBehaviour
 {
     [Header("Equipped Items")]
-    [SerializeField] private WeaponData equippedWeapon;
+    [SerializeField] private WeaponItemData equippedWeapon;
 
-    public WeaponData EquippedWeapon => equippedWeapon;
+    public WeaponItemData EquippedWeapon => equippedWeapon;
 
     public float GetWeaponDamageBonus()
     {
@@ -27,7 +27,7 @@ public class CharacterEquipment : MonoBehaviour
         return equippedWeapon.attackRange;
     }
 
-    public void EquipWeapon(WeaponData newWeapon)
+    public void EquipWeapon(WeaponItemData newWeapon)
     {
         equippedWeapon = newWeapon;
     }
