@@ -92,14 +92,14 @@ public class CharacterCombat : MonoBehaviour
     public float GetDamage()
     {
         float baseDamage = characterStats != null ? characterStats.Damage : 0f;
-        float weaponBonus = equipment != null ? equipment.GetWeaponDamageBonus() : 0f;
+        float weaponBonus = equipment != null ? equipment.DamageBonus : 0f;
         return baseDamage + weaponBonus;
     }
 
     public float GetAttackRange()
     {
         if (equipment != null)
-            return equipment.GetAttackRange();
+            return equipment.AttackRange;
 
         return defaultAttackRange;
     }

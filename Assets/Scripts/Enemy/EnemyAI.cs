@@ -28,7 +28,7 @@ public class EnemyAI : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, targetTransform.position);
 
-        if (distance > characterEquipment.GetAttackRange())
+        if (distance > characterEquipment.AttackRange)
         {
             MoveTowardTarget();
         }

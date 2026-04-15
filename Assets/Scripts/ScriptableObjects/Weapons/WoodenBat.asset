@@ -12,6 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b85f4c72bdfc647b856dcb9c5a8770, type: 3}
   m_Name: WoodenBat
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  weaponName: Wooden Bat
+  itemId: 
+  itemName: 
+  description: 
+  icon: {fileID: 0}
+  value: 1
+  weight: 0
+  maxStack: 1
+  category: 0
   damageBonus: 5
   attackRange: 2
+  equippedPrefab: {fileID: 5554070756066147622, guid: 49c293130a972e648a695017349a5b36, type: 3}

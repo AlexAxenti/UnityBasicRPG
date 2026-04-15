@@ -12,6 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b85f4c72bdfc647b856dcb9c5a8770, type: 3}
   m_Name: RustyDagger
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  weaponName: Rusty Dagger
+  itemId: 
+  itemName: 
+  description: 
+  icon: {fileID: 0}
+  value: 1
+  weight: 0
+  maxStack: 1
+  category: 0
   damageBonus: 5
   attackRange: 1.5
+  equippedPrefab: {fileID: 4907401341016996313, guid: 1bcd1bfb90a7c794a8bb25995fb09528, type: 3}

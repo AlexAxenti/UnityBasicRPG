@@ -3,13 +3,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "WeaponItemData", menuName = "RPG/Items/Weapon")]
 public class WeaponItemData : ItemData
 {
-    //TODO remove public
     [Header("Combat")]
-    public int damageBonus = 0;
-    public float attackRange = 0f;
+    [SerializeField] private float damageBonus = 0;
+    [SerializeField] private float attackRange = 0f;
 
     [Header("Visual")]
-    public GameObject equippedPrefab;
+    [SerializeField] private GameObject equippedPrefab;
+
+    public float DamageBonus => damageBonus;
+    public float AttackRange => attackRange;
+    public GameObject EquippedPrefab => equippedPrefab;
 
     private void OnValidate()
     {

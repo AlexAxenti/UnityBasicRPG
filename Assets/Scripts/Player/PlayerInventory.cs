@@ -10,6 +10,18 @@ public class PlayerInventory : MonoBehaviour
     public IReadOnlyList<InventorySlot> Slots => slots;
     public int Gold => gold;
 
+    //TODO remove after testing
+    [Header("Debug / Starting Items")]
+    [SerializeField] private WeaponItemData startingWeapon;
+
+    private void Start()
+    {
+        if (startingWeapon != null && !HasItem(startingWeapon))
+        {
+            AddItem(startingWeapon, 1);
+        }
+    }
+
     public bool AddItem(ItemData item, int amount = 1)
     {
         if (item == null || amount <= 0) return false;
@@ -66,15 +78,40 @@ public class PlayerInventory : MonoBehaviour
         return false;
     }
 
+    //TODO potentially remove
+    public bool HasItem(ItemData item, int amount = 1)
+    {
+        if (item == null || amount <= 0) return false;
+
+        int total = 0;
+
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (slots[i].item == item)
+            {
+                total += slots[i].quantity;
+                if (total >= amount)
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    //TODO remove after testing
+    public WeaponItemData FindFirstWeapon()
+    {
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (slots[i].item is WeaponItemData weapon && slots[i].quantity > 0)
+                return weapon;
+        }
+
+        return null;
+    }
+
     public void AddGold(int amount)
     {
         gold += Mathf.Max(0, amount);
-    }
-
-    public bool SpendGold(int amount)
-    {
-        if (amount < 0 || gold < amount) return false;
-        gold -= amount;
-        return true;
     }
 }
