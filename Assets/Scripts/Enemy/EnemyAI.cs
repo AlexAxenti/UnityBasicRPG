@@ -2,35 +2,39 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] private float attackCooldown = 1f;
     private CharacterStats characterStats;
+    private CharacterEquipment characterEquipment;
+    private CharacterCombat combat;
 
     private Transform targetTransform;
-    private CharacterHealth targetHealth;
-    private float lastAttackTime;
 
     private void Awake()
     {
         characterStats = GetComponent<CharacterStats>();
+        characterEquipment = GetComponent<CharacterEquipment>();
+        combat = GetComponent<CharacterCombat>();
+
         if (characterStats == null)
-        {
-            Debug.LogError("CharacterStats component not found on " + gameObject.name);
-        }
+            Debug.LogError($"CharacterStats missing on {gameObject.name}");
+
+        if (combat == null)
+            Debug.LogError($"CharacterCombat missing on {gameObject.name}");
     }
 
     private void Update()
     {
-        if (targetTransform == null) return;
+        if (targetTransform == null)
+            return;
 
         float distance = Vector3.Distance(transform.position, targetTransform.position);
 
-        if (distance > characterStats.AttackRange)
+        if (distance > characterEquipment.GetAttackRange())
         {
             MoveTowardTarget();
         }
         else
         {
-            TryAttack();
+            combat.TryAttack();
         }
     }
 
@@ -47,29 +51,15 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    private void TryAttack()
-    {
-        if (Time.time < lastAttackTime + attackCooldown) return;
-
-        lastAttackTime = Time.time;
-
-        if (targetHealth != null)
-        {
-            targetHealth.TakeDamage(characterStats.Damage);
-            Debug.Log("Enemy attacked target");
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         CharacterInfo foundInfo = other.GetComponentInParent<CharacterInfo>();
         if (foundInfo == null || foundInfo.FactionType != FactionType.Player)
             return;
-        
+
         CharacterHealth foundHealth = other.GetComponentInParent<CharacterHealth>();
         if (foundHealth != null)
         {
-            targetHealth = foundHealth;
             targetTransform = foundHealth.transform.root;
         }
     }
@@ -80,7 +70,6 @@ public class EnemyAI : MonoBehaviour
         if (foundHealth != null && targetTransform == foundHealth.transform.root)
         {
             targetTransform = null;
-            targetHealth = null;
         }
     }
 }

@@ -1287,24 +1287,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
       objectReference: {fileID: 0}
-    - target: {fileID: 9203855962816241644, guid: e39cb86ab82d6674aac06f088f77aa95, type: 3}
-      propertyPath: baseDamage
-      value: 5
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2014612672871913263, guid: e39cb86ab82d6674aac06f088f77aa95, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1802467558904152243, guid: e39cb86ab82d6674aac06f088f77aa95, type: 3}
       insertIndex: 2
       addedObject: {fileID: 2192525037664012166}
-    - targetCorrespondingSourceObject: {fileID: 1802467558904152243, guid: e39cb86ab82d6674aac06f088f77aa95, type: 3}
-      insertIndex: 6
-      addedObject: {fileID: 2192525037664012176}
-    - targetCorrespondingSourceObject: {fileID: 1802467558904152243, guid: e39cb86ab82d6674aac06f088f77aa95, type: 3}
-      insertIndex: 7
-      addedObject: {fileID: 2192525037664012175}
     - targetCorrespondingSourceObject: {fileID: 1802467558904152243, guid: e39cb86ab82d6674aac06f088f77aa95, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2192525037664012167}
@@ -1349,32 +1338,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterEquipment
   equippedWeapon: {fileID: 11400000, guid: a91a9175d8e038a4db4a2a82da753a3d, type: 2}
---- !u!114 &2192525037664012175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2192525037664012155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be6f2df4846640c4e91f53926f591df4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CharacterCombat
-  attackCooldown: 0.5
-  defaultAttackRange: 1
---- !u!114 &2192525037664012176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2192525037664012155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54f617524c9bed2439ea2ea54a995760, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
 --- !u!1001 &8311042423211246207
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1439,20 +1402,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6506570850150215115, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8038328745804696601, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8311042423211246223}
-    - targetCorrespondingSourceObject: {fileID: 8038328745804696601, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8311042423211246225}
-    - targetCorrespondingSourceObject: {fileID: 8038328745804696601, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8311042423211246224}
   m_SourcePrefab: {fileID: 100100000, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
 --- !u!1 &8311042423211246208 stripped
 GameObject:
@@ -1494,32 +1450,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterEquipment
   equippedWeapon: {fileID: 11400000, guid: d5151d40afc56f249a58dd28d2803460, type: 2}
---- !u!114 &8311042423211246224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8311042423211246208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 372f38b6134a4d14683b65e58444dfea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerCombatInput
---- !u!114 &8311042423211246225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8311042423211246208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be6f2df4846640c4e91f53926f591df4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CharacterCombat
-  attackCooldown: 0.5
-  defaultAttackRange: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
