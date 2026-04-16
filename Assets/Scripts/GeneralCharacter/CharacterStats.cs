@@ -7,7 +7,7 @@ public class CharacterStats : MonoBehaviour
     [Header("Base Stats")]
     [SerializeField] private float baseMaxHealth = 100;
     [SerializeField] private float baseDamage = 10;
-    [SerializeField] private float baseAttackRange = 1.5f;
+    [SerializeField] private float baseAttackRange = 1f;
     [SerializeField] private float baseArmor = 5;
     [SerializeField] private float baseMovementSpeed = 5;
 

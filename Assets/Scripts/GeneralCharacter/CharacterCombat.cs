@@ -3,7 +3,6 @@ using UnityEngine;
 public class CharacterCombat : MonoBehaviour
 {
     [SerializeField] private float attackCooldown = 0.5f;
-    [SerializeField] private float defaultAttackRange = 1f;
 
     private float lastAttackTime;
     private bool attackWindowOpen;
@@ -89,6 +88,7 @@ public class CharacterCombat : MonoBehaviour
         }
     }
 
+    //TODO should these 2 be here or should it be centralized in character stats or elsewhere
     public float GetDamage()
     {
         float baseDamage = characterStats != null ? characterStats.Damage : 0f;
@@ -98,9 +98,9 @@ public class CharacterCombat : MonoBehaviour
 
     public float GetAttackRange()
     {
-        if (equipment != null)
+        if (equipment != null && equipment.EquippedWeapon != null)
             return equipment.AttackRange;
 
-        return defaultAttackRange;
+        return characterStats != null ? characterStats.AttackRange : 1f;
     }
 }

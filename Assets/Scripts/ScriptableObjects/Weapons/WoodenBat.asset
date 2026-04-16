@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WoodenBat
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   itemId: 
-  itemName: 
+  itemName: Wooden Bat
   description: 
   icon: {fileID: 0}
   value: 1

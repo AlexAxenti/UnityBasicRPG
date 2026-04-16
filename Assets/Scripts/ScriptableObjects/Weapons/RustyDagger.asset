@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RustyDagger
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   itemId: 
-  itemName: 
+  itemName: Rusty Dagger
   description: 
   icon: {fileID: 0}
   value: 1

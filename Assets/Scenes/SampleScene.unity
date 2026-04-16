@@ -1275,6 +1275,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin
       objectReference: {fileID: 0}
+    - target: {fileID: 9203855962816241644, guid: e39cb86ab82d6674aac06f088f77aa95, type: 3}
+      propertyPath: baseAttackRange
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1288,6 +1292,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 678428262995541748, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 872548807408351170, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1328,6 +1336,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4639909205902079521, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
+      propertyPath: baseAttackRange
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7525548591987857849, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
       propertyPath: cameraFollow
       value: 
@@ -1343,14 +1355,25 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8038328745804696601, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8311042423211246233}
+    - targetCorrespondingSourceObject: {fileID: 8038328745804696601, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8311042423211246232}
   m_SourcePrefab: {fileID: 100100000, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
+--- !u!1 &8311042423211246208 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8038328745804696601, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
+  m_PrefabInstance: {fileID: 8311042423211246207}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8311042423211246210 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4845192882909206868, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
   m_PrefabInstance: {fileID: 8311042423211246207}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 8311042423211246208}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2ebcc6d610e7ff4b90a63a526e4967a, type: 3}
@@ -1361,12 +1384,40 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5396636225462630862, guid: 2d9ece0ab244c884fb4ffd2d52f16cfb, type: 3}
   m_PrefabInstance: {fileID: 8311042423211246207}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 8311042423211246208}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b9a26def8501824791fae448cea442b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerProgression
+--- !u!114 &8311042423211246232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8311042423211246208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01e14469c166cbe459a1bde0438ef14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!114 &8311042423211246233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8311042423211246208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5014251969e0f6540941efd9f0f67b10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
+  maxSlots: 20
+  slots: []
+  gold: 0
+  startingWeapon: {fileID: 11400000, guid: d5151d40afc56f249a58dd28d2803460, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
