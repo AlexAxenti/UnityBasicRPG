@@ -32,6 +32,14 @@ public class CharacterEquipment : MonoBehaviour
         RefreshWeaponVisual();
     }
 
+    public bool IsItemEquipped(ItemData item)
+    {
+        if (item == null)
+            return false;
+
+        return equippedWeapon == item;
+    }
+
     private void RefreshWeaponVisual()
     {
         if (equippedWeaponInstance != null)

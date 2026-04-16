@@ -9,6 +9,7 @@ public class PlayerInventory : MonoBehaviour
 
     public IReadOnlyList<InventorySlot> Slots => slots;
     public int Gold => gold;
+    public int MaxSlots => maxSlots;
 
     //TODO remove after testing
     [Header("Debug / Starting Items")]
@@ -76,6 +77,14 @@ public class PlayerInventory : MonoBehaviour
         }
 
         return false;
+    }
+
+    public InventorySlot GetItemAtSlot(int index)
+    {
+        if (index < 0 || index >= maxSlots || index >= slots.Count)
+            return null;
+
+        return slots[index];
     }
 
     //TODO potentially remove
