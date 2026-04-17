@@ -452,8 +452,9 @@ GameObject:
   - component: {fileID: 7818936171479423017}
   - component: {fileID: 8928351744373987392}
   - component: {fileID: 7059225138338213053}
-  - component: {fileID: 2173890841491599525}
   - component: {fileID: 7822719686330975058}
+  - component: {fileID: 830015799271003084}
+  - component: {fileID: 8707524304518499933}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -550,7 +551,7 @@ MonoBehaviour:
   level: 1
   baseMaxHealth: 50
   baseDamage: 5
-  baseAttackRange: 1.5
+  baseAttackRange: 1
   baseArmor: 5
   baseMovementSpeed: 3
   maxHealthPerLevel: 10
@@ -596,20 +597,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterCombat
   attackCooldown: 0.5
-  defaultAttackRange: 1
---- !u!114 &2173890841491599525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1802467558904152243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e82e262246227cd4e890ebd88073e0f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ExperienceReward
-  experienceAmount: 25
 --- !u!114 &7822719686330975058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,6 +611,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterEquipment
   equippedWeapon: {fileID: 11400000, guid: a91a9175d8e038a4db4a2a82da753a3d, type: 2}
   weaponSocket: {fileID: 1228895849311160099}
+--- !u!114 &830015799271003084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802467558904152243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5c93b9de6e1eb4bb71ac5b8d6cbf06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DestroyOnDeath
+  destroyDelay: 0
+--- !u!114 &8707524304518499933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802467558904152243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15408e4ed368f1b40944a6d563815c1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AwardExperienceOnDeath
+  experienceAmount: 10
 --- !u!1 &1910618689580537667
 GameObject:
   m_ObjectHideFlags: 0

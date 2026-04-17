@@ -1,3 +1,4 @@
+//TODO rename something more generic as used for loot too
 [System.Serializable]
 public class InventorySlot
 {

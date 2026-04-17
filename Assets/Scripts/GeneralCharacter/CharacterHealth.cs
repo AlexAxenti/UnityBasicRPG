@@ -16,8 +16,11 @@ public class CharacterHealth : MonoBehaviour
     public float CurrentHealth => currentHealth;
     public float MaxHealth => characterStats != null ? characterStats.MaxHealth : 0f;
 
+    public event Action<CharacterHealth> OnDied;
+    private bool isDead;
+    public bool IsDead => isDead;
     //TODO move later
-    private ExperienceReward experienceReward;
+    // private ExperienceReward experienceReward;
 
     private void Awake()
     {
@@ -33,7 +36,7 @@ public class CharacterHealth : MonoBehaviour
             currentHealth = 100;
         }
 
-        experienceReward = GetComponent<ExperienceReward>();
+        // experienceReward = GetComponent<ExperienceReward>();
     }
 
     private void Update()
@@ -85,20 +88,20 @@ public class CharacterHealth : MonoBehaviour
     }
 
     private void Die()
-    {
-        AwardExperience();
+    {      
+        if (isDead) return;
+        isDead = true;
 
-        Debug.Log($"{characterInfo.CharacterName} died");
-        Destroy(gameObject);
+        OnDied?.Invoke(this);
     }
 
-    private void AwardExperience()
-    {
-        if (experienceReward == null) return;
+    // private void AwardExperience()
+    // {
+    //     if (experienceReward == null) return;
 
-        PlayerProgression playerProgression = FindAnyObjectByType<PlayerProgression>();
-        if (playerProgression == null) return;
+    //     PlayerProgression playerProgression = FindAnyObjectByType<PlayerProgression>();
+    //     if (playerProgression == null) return;
 
-        playerProgression.GainExperience(experienceReward.ExperienceAmount);
-    }
+    //     playerProgression.GainExperience(experienceReward.ExperienceAmount);
+    // }
 }
