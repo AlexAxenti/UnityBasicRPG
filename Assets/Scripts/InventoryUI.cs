@@ -37,7 +37,15 @@ public class InventoryUI : MonoBehaviour
 
         if (newState)
         {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
             RefreshUI();
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 
@@ -48,6 +56,7 @@ public class InventoryUI : MonoBehaviour
         for (int i = 0; i < playerInventory.MaxSlots; i++)
         {
             InventorySlotUI slotUI = Instantiate(slotPrefab, slotContainer);
+            slotUI.Initialize(this, i);
             spawnedSlots.Add(slotUI);
         }
 
@@ -73,6 +82,35 @@ public class InventoryUI : MonoBehaviour
 
             slotUI.SetItem(item.icon, slot.quantity, isEquipped);
         }
+    }
+
+    public void OnSlotClicked(int slotIndex)
+    {
+        Debug.Log($"InventoryUI received click for slot {slotIndex}");
+
+        InventorySlot slot = playerInventory.GetItemAtSlot(slotIndex);
+
+        if (slot == null || slot.IsEmpty)
+            return;
+
+        if (slot.item is WeaponItemData weapon)
+        {
+            if (characterEquipment.EquippedWeapon == weapon)
+            {
+                characterEquipment.UnequipWeapon();
+                Debug.Log($"Unequipped weapon: {weapon.itemName}");
+            }
+            else
+            {
+                characterEquipment.EquipWeapon(weapon);
+                Debug.Log($"Equipped weapon: {weapon.itemName}");
+            }
+
+            RefreshUI();
+            return;
+        }
+
+        Debug.Log($"Clicked item: {slot.item.itemName} (no click behavior yet)");
     }
 
     private bool IsItemEquipped(ItemData item)

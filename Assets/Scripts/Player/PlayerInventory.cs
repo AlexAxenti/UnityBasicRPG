@@ -84,6 +84,7 @@ public class PlayerInventory : MonoBehaviour
         if (index < 0 || index >= maxSlots || index >= slots.Count)
             return null;
 
+        Debug.Log($"Looking for item at slot {index}: {(slots[index].IsEmpty ? "Empty" : slots[index].item.itemName)}");
         return slots[index];
     }
 
