@@ -3,13 +3,18 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
+public class InventorySlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     //TODO should this be found on Awake instead
+    [Header("References")]
     [SerializeField] private Image itemIcon;
     [SerializeField] private TMP_Text quantityText;
     [SerializeField] private GameObject equippedHighlight;
     [SerializeField] private Image slotBackground;
+
+    [Header("Hover Colors")]
+    [SerializeField] private Color normalBackgroundColor = Color.white;
+    [SerializeField] private Color hoverBackgroundColor = new Color(1f, 1f, 1f, 0.85f);
 
     private InventoryUI ownerUI;
     private int slotIndex;
@@ -50,11 +55,33 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log($"Clicked slot UI {slotIndex}");
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            ownerUI?.OnSlotLeftClicked(slotIndex);
+        }
+        else if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            ownerUI?.OnSlotRightClicked(slotIndex);
+        }
+    }
 
-        if (eventData.button != PointerEventData.InputButton.Left)
-            return;
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        SetHovered(true);
+        ownerUI?.OnSlotHovered(slotIndex);
+    }
 
-        ownerUI?.OnSlotClicked(slotIndex);
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        SetHovered(false);
+        ownerUI?.OnSlotHoverExited(slotIndex);
+    }
+
+    private void SetHovered(bool isHovered)
+    {
+        if (slotBackground != null)
+        {
+            slotBackground.color = isHovered ? hoverBackgroundColor : normalBackgroundColor;
+        }
     }
 }

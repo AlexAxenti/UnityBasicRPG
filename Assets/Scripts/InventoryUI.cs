@@ -10,6 +10,9 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private InventorySlotUI slotPrefab;
     [SerializeField] private PlayerInventory playerInventory;
     [SerializeField] private CharacterEquipment characterEquipment;
+    [SerializeField] private ItemTooltipUI itemTooltipUI;
+    [SerializeField] private ItemContextMenuUI itemContextMenuUI;
+
 
     [Header("Input")]
     [SerializeField] private Key toggleKey = Key.Tab;
@@ -19,6 +22,8 @@ public class InventoryUI : MonoBehaviour
     private void Start()
     {
         inventoryPanel.SetActive(false);
+        itemTooltipUI.Hide();
+        itemContextMenuUI.Hide();
         RebuildUI();
     }
 
@@ -46,6 +51,8 @@ public class InventoryUI : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            itemTooltipUI.Hide();
+            itemContextMenuUI.Hide();
         }
     }
 
@@ -84,10 +91,27 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void OnSlotClicked(int slotIndex)
+    public void OnSlotHovered(int slotIndex)
     {
-        Debug.Log($"InventoryUI received click for slot {slotIndex}");
+        InventorySlot slot = playerInventory.GetItemAtSlot(slotIndex);
 
+        if (slot == null || slot.IsEmpty)
+        {
+            itemTooltipUI.Hide();
+            return;
+        }
+
+        itemTooltipUI.Show(slot.item);
+    }
+
+    public void OnSlotHoverExited(int slotIndex)
+    {
+        itemTooltipUI.Hide();
+    }
+
+    public void OnSlotLeftClicked(int slotIndex)
+    {
+        Debug.Log($"Left clicked: {slotIndex}");
         InventorySlot slot = playerInventory.GetItemAtSlot(slotIndex);
 
         if (slot == null || slot.IsEmpty)
@@ -110,7 +134,48 @@ public class InventoryUI : MonoBehaviour
             return;
         }
 
-        Debug.Log($"Clicked item: {slot.item.itemName} (no click behavior yet)");
+        Debug.Log($"Clicked item: {slot.item.itemName}");
+    }
+
+    public void OnSlotRightClicked(int slotIndex)
+    {
+        Debug.Log($"Right clicked: {slotIndex}");
+        InventorySlot slot = playerInventory.GetItemAtSlot(slotIndex);
+
+        if (slot == null || slot.IsEmpty)
+            return;
+
+        ItemData item = slot.item;
+
+        if (item is WeaponItemData weapon)
+        {
+            bool isEquipped = characterEquipment.EquippedWeapon == weapon;
+            string label = isEquipped ? "Unequip" : "Equip";
+
+            Vector2 mousePosition = Mouse.current.position.ReadValue();
+
+            itemContextMenuUI.Show(
+                mousePosition,
+                label,
+                () =>
+                {
+                    if (isEquipped)
+                    {
+                        characterEquipment.UnequipWeapon();
+                        Debug.Log($"Unequipped weapon: {weapon.itemName}");
+                    }
+                    else
+                    {
+                        characterEquipment.EquipWeapon(weapon);
+                        Debug.Log($"Equipped weapon: {weapon.itemName}");
+                    }
+
+                    RefreshUI();
+                });
+            return;
+        }
+
+        Debug.Log($"Right clicked: {item.itemName}");
     }
 
     private bool IsItemEquipped(ItemData item)
