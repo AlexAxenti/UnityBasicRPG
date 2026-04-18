@@ -27,6 +27,12 @@ public class PlayerInventory : MonoBehaviour
     {
         if (item == null || amount <= 0) return false;
 
+        if (item.category == ItemCategory.Gold)
+        {
+            AddGold(amount);
+            return true;
+        }
+
         if (item.maxStack > 1)
         {
             for (int i = 0; i < slots.Count; i++)

@@ -7,6 +7,7 @@ public enum ItemCategory
     Consumable,
     Material,
     Quest,
+    Gold,
     Misc
 }
 

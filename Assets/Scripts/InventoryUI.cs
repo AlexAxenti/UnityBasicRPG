@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private Transform slotContainer;
     [SerializeField] private InventorySlotUI slotPrefab;
+    [SerializeField] private TMP_Text goldText;
     [SerializeField] private PlayerInventory playerInventory;
     [SerializeField] private CharacterEquipment characterEquipment;
     [SerializeField] private ItemTooltipUI itemTooltipUI;
@@ -72,6 +74,8 @@ public class InventoryUI : MonoBehaviour
 
     public void RefreshUI()
     {
+        goldText.text = $"Gold: {playerInventory.Gold}";
+
         for (int i = 0; i < spawnedSlots.Count; i++)
         {
             InventorySlotUI slotUI = spawnedSlots[i];
@@ -109,6 +113,7 @@ public class InventoryUI : MonoBehaviour
         itemTooltipUI.Hide();
     }
 
+    //TODO refactor so character equipment handles whether an equipment is equipped or not.
     public void OnSlotLeftClicked(int slotIndex)
     {
         Debug.Log($"Left clicked: {slotIndex}");
