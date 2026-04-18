@@ -455,6 +455,8 @@ GameObject:
   - component: {fileID: 7822719686330975058}
   - component: {fileID: 830015799271003084}
   - component: {fileID: 8707524304518499933}
+  - component: {fileID: 9070842082720857656}
+  - component: {fileID: 171433240075413698}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -637,6 +639,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AwardExperienceOnDeath
   experienceAmount: 10
+--- !u!114 &9070842082720857656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802467558904152243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f35a23cf5f1cc469c9daa79e65f3ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LootTable
+  entries:
+  - item: {fileID: 11400000, guid: d5151d40afc56f249a58dd28d2803460, type: 2}
+    dropChance: 1
+    minQuantity: 1
+    maxQuantity: 1
+  - item: {fileID: 11400000, guid: a91a9175d8e038a4db4a2a82da753a3d, type: 2}
+    dropChance: 1
+    minQuantity: 1
+    maxQuantity: 1
+  - item: {fileID: 11400000, guid: 33f86b0f93032f5479f19c5c0b15aeec, type: 2}
+    dropChance: 1
+    minQuantity: 2
+    maxQuantity: 10
+--- !u!114 &171433240075413698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802467558904152243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a16e56ae8d6a08438dc06ecc9577ad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DropLootOnDeath
+  lootTable: {fileID: 9070842082720857656}
+  lootContainerPrefab: {fileID: 3208227475201665517, guid: 615dd1a6171597b43876f3080e4ab99d, type: 3}
+  spawnOffset: {x: 0, y: -0.5, z: 0}
 --- !u!1 &1910618689580537667
 GameObject:
   m_ObjectHideFlags: 0

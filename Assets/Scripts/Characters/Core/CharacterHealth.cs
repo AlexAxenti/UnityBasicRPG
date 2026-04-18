@@ -5,6 +5,7 @@ public class CharacterHealth : MonoBehaviour
 {
     private CharacterInfo characterInfo;
     private CharacterStats characterStats;
+    private CharacterEquipment characterEquipment;
     private float currentHealth;
 
     //TODO move to seperate regen component later
@@ -26,6 +27,7 @@ public class CharacterHealth : MonoBehaviour
     {
         characterInfo = GetComponent<CharacterInfo>();
         characterStats = GetComponent<CharacterStats>();
+        characterEquipment = GetComponent<CharacterEquipment>();
         if (characterStats != null)
         {
             currentHealth = characterStats.MaxHealth;
@@ -34,6 +36,16 @@ public class CharacterHealth : MonoBehaviour
         {
             Debug.LogError("CharacterStats component not found on " + gameObject.name);
             currentHealth = 100;
+        }
+
+        if (characterInfo == null)
+        {
+            Debug.LogError("CharacterInfo component not found on " + gameObject.name);
+        }
+
+        if (characterEquipment == null)
+        {
+            Debug.LogError("CharacterEquipment component not found on " + gameObject.name);
         }
 
         // experienceReward = GetComponent<ExperienceReward>();
@@ -76,7 +88,9 @@ public class CharacterHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        currentHealth -= damage;
+        float armorBonus = characterEquipment != null ? characterEquipment.ArmorBonus : 0f;
+        //TODO add better armor calculation later
+        currentHealth -= Mathf.Max(damage - armorBonus, 0);
         currentHealth = Mathf.Max(currentHealth, 0);
 
         Debug.Log($"{characterInfo.CharacterName} health: {currentHealth}");
@@ -94,14 +108,4 @@ public class CharacterHealth : MonoBehaviour
 
         OnDied?.Invoke(this);
     }
-
-    // private void AwardExperience()
-    // {
-    //     if (experienceReward == null) return;
-
-    //     PlayerProgression playerProgression = FindAnyObjectByType<PlayerProgression>();
-    //     if (playerProgression == null) return;
-
-    //     playerProgression.GainExperience(experienceReward.ExperienceAmount);
-    // }
 }

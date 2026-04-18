@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//TODO switch to playerController? once movement is moved to CharacterMotor
 public class PlayerCombatInput : MonoBehaviour
 {
     private CharacterCombat combat;

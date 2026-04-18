@@ -137,6 +137,25 @@ public class InventoryUI : MonoBehaviour
 
             RefreshUI();
             return;
+        } 
+        //TODO make more generic
+        else if (slot.item is ArmorItemData armor)
+        {
+            bool isEquipped = characterEquipment.EquippedArmor == armor;
+
+            if (isEquipped)
+            {
+                characterEquipment.UnequipArmor();
+                Debug.Log($"Unequipped armor: {armor.itemName}");
+            }
+            else
+            {
+                characterEquipment.EquipArmor(armor);
+                Debug.Log($"Equipped armor: {armor.itemName}");
+            }
+
+            RefreshUI();
+            return;
         }
 
         Debug.Log($"Clicked item: {slot.item.itemName}");

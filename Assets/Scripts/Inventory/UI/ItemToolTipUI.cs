@@ -46,6 +46,11 @@ public class ItemTooltipUI : MonoBehaviour
                 $"Damage: {weapon.DamageBonus}\n" +
                 $"Range: {weapon.AttackRange}";
         }
+        else if (item is ArmorItemData armor)
+        {
+            statsText.text =
+                $"Armor: {armor.ArmorBonus}";
+        }
         else
         {
             statsText.text = "";
