@@ -23,7 +23,6 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnte
     {
         this.ownerUI = ownerUI;
         slotIndex = index;
-        Debug.Log($"Initialized slot {slotIndex}");
     }
 
     public void SetEmpty()

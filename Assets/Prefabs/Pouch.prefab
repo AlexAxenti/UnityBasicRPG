@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8389367251849432564}
   - component: {fileID: 175079156459779955}
   - component: {fileID: 3208227475201665517}
-  m_Layer: 0
+  - component: {fileID: 2924856601895812372}
+  m_Layer: 6
   m_Name: Pouch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +108,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -126,3 +127,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LootPouch
   storedItems: []
+--- !u!114 &2924856601895812372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854161181520695675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8780db11024202c4d82484ddf379a964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LootInspectable
+  label: Loot
+  hasInteraction: 1
+  interactionKey: 20
+  lootPouch: {fileID: 3208227475201665517}
