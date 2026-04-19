@@ -3,8 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private Transform cameraTransform;
-    [SerializeField] private CameraFollow cameraFollow;
+    private Transform cameraTransform;
+    private CameraFollow cameraFollow;
 
     private CharacterMotor motor;
     private CharacterCombat combat;
@@ -19,6 +19,16 @@ public class PlayerController : MonoBehaviour
 
         if (combat == null)
             Debug.LogError($"CharacterCombat missing on {gameObject.name}");
+
+        if (cameraTransform == null)
+        {
+            Camera mainCam = Camera.main;
+            if (mainCam != null)
+            {
+                cameraTransform = mainCam.transform;
+                cameraFollow = mainCam.GetComponent<CameraFollow>();
+            }
+        }
     }
 
     private void Update()

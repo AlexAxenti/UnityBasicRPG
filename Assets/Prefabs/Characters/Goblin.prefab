@@ -681,12 +681,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LootTable
   entries:
-  - item: {fileID: 11400000, guid: d5151d40afc56f249a58dd28d2803460, type: 2}
-    dropChance: 1
-    minQuantity: 1
-    maxQuantity: 1
   - item: {fileID: 11400000, guid: a91a9175d8e038a4db4a2a82da753a3d, type: 2}
-    dropChance: 1
+    dropChance: 0.33
     minQuantity: 1
     maxQuantity: 1
   - item: {fileID: 11400000, guid: 33f86b0f93032f5479f19c5c0b15aeec, type: 2}
@@ -694,7 +690,7 @@ MonoBehaviour:
     minQuantity: 2
     maxQuantity: 10
   - item: {fileID: 11400000, guid: cb260a2ccdc8cf741b661439b5bd5108, type: 2}
-    dropChance: 1
+    dropChance: 0.05
     minQuantity: 1
     maxQuantity: 1
 --- !u!114 &171433240075413698

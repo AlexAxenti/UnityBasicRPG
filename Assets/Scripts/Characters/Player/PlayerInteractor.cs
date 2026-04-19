@@ -9,17 +9,23 @@ public class PlayerInteractor : MonoBehaviour
     [SerializeField] private float forwardDotThreshold = 0.4f;
     [SerializeField] private LayerMask inspectableLayers;
 
-    [Header("References")]
-    [SerializeField] private Transform detectionOrigin;
-    [SerializeField] private InteractionPromptUI promptUI;
+    private Transform detectionOrigin;
+    private InteractionPromptUI promptUI;
 
     private Inspectable currentInspectable;
 
     public Inspectable CurrentInspectable => currentInspectable;
 
-    private void Reset()
+    private void Awake()
     {
+        promptUI = FindAnyObjectByType<InteractionPromptUI>(FindObjectsInactive.Include);
         detectionOrigin = transform;
+
+        if (detectionOrigin == null)
+            Debug.LogWarning($"Detection origin not assigned on {gameObject.name}, using player position");
+
+        if (promptUI == null)
+            Debug.LogWarning($"InteractionPromptUI not assigned on {gameObject.name}");
     }
 
     private void Update()
