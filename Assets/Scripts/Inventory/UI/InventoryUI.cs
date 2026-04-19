@@ -1,7 +1,7 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -14,7 +14,6 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private CharacterEquipment characterEquipment;
     [SerializeField] private ItemTooltipUI itemTooltipUI;
     [SerializeField] private ItemContextMenuUI itemContextMenuUI;
-
 
     [Header("Input")]
     [SerializeField] private Key toggleKey = Key.Tab;
@@ -46,7 +45,6 @@ public class InventoryUI : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-
             RefreshUI();
         }
         else
@@ -79,7 +77,6 @@ public class InventoryUI : MonoBehaviour
         for (int i = 0; i < spawnedSlots.Count; i++)
         {
             InventorySlotUI slotUI = spawnedSlots[i];
-
             InventorySlot slot = playerInventory.GetItemAtSlot(i);
 
             if (slot == null || slot.IsEmpty)
@@ -89,7 +86,7 @@ public class InventoryUI : MonoBehaviour
             }
 
             ItemData item = slot.item;
-            bool isEquipped = IsItemEquipped(item);
+            bool isEquipped = characterEquipment != null && characterEquipment.IsSlotEquipped(i);
 
             slotUI.SetItem(item.icon, slot.quantity, isEquipped);
         }
@@ -113,47 +110,16 @@ public class InventoryUI : MonoBehaviour
         itemTooltipUI.Hide();
     }
 
-    //TODO refactor so character equipment handles whether an equipment is equipped or not.
     public void OnSlotLeftClicked(int slotIndex)
     {
-        Debug.Log($"Left clicked: {slotIndex}");
         InventorySlot slot = playerInventory.GetItemAtSlot(slotIndex);
 
         if (slot == null || slot.IsEmpty)
             return;
 
-        if (slot.item is WeaponItemData weapon)
+        if (characterEquipment != null && characterEquipment.ToggleEquip(slot.item, slotIndex))
         {
-            if (characterEquipment.EquippedWeapon == weapon)
-            {
-                characterEquipment.UnequipWeapon();
-                Debug.Log($"Unequipped weapon: {weapon.itemName}");
-            }
-            else
-            {
-                characterEquipment.EquipWeapon(weapon);
-                Debug.Log($"Equipped weapon: {weapon.itemName}");
-            }
-
-            RefreshUI();
-            return;
-        } 
-        //TODO make more generic
-        else if (slot.item is ArmorItemData armor)
-        {
-            bool isEquipped = characterEquipment.EquippedArmor == armor;
-
-            if (isEquipped)
-            {
-                characterEquipment.UnequipArmor();
-                Debug.Log($"Unequipped armor: {armor.itemName}");
-            }
-            else
-            {
-                characterEquipment.EquipArmor(armor);
-                Debug.Log($"Equipped armor: {armor.itemName}");
-            }
-
+            Debug.Log($"Toggled equip: {slot.item.itemName}");
             RefreshUI();
             return;
         }
@@ -163,7 +129,6 @@ public class InventoryUI : MonoBehaviour
 
     public void OnSlotRightClicked(int slotIndex)
     {
-        Debug.Log($"Right clicked: {slotIndex}");
         InventorySlot slot = playerInventory.GetItemAtSlot(slotIndex);
 
         if (slot == null || slot.IsEmpty)
@@ -171,11 +136,10 @@ public class InventoryUI : MonoBehaviour
 
         ItemData item = slot.item;
 
-        if (item is WeaponItemData weapon)
+        if (characterEquipment != null && IsEquippable(item))
         {
-            bool isEquipped = characterEquipment.EquippedWeapon == weapon;
+            bool isEquipped = characterEquipment.IsSlotEquipped(slotIndex);
             string label = isEquipped ? "Unequip" : "Equip";
-
             Vector2 mousePosition = Mouse.current.position.ReadValue();
 
             itemContextMenuUI.Show(
@@ -183,31 +147,20 @@ public class InventoryUI : MonoBehaviour
                 label,
                 () =>
                 {
-                    if (isEquipped)
-                    {
-                        characterEquipment.UnequipWeapon();
-                        Debug.Log($"Unequipped weapon: {weapon.itemName}");
-                    }
-                    else
-                    {
-                        characterEquipment.EquipWeapon(weapon);
-                        Debug.Log($"Equipped weapon: {weapon.itemName}");
-                    }
-
+                    characterEquipment.ToggleEquip(item, slotIndex);
+                    Debug.Log($"Toggled equip from context menu: {item.itemName}");
                     RefreshUI();
                 });
+
             return;
         }
 
         Debug.Log($"Right clicked: {item.itemName}");
     }
 
-    private bool IsItemEquipped(ItemData item)
+    private bool IsEquippable(ItemData item)
     {
-        if (item == null || characterEquipment == null)
-            return false;
-
-        return characterEquipment.IsItemEquipped(item);
+        return item is WeaponItemData || item is ArmorItemData;
     }
 
     private void ClearSlots()

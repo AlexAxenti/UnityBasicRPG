@@ -452,7 +452,6 @@ GameObject:
   - component: {fileID: 678428262995541748}
   - component: {fileID: 4600383437065725788}
   - component: {fileID: 4231343594298194238}
-  - component: {fileID: 1465517786698470501}
   - component: {fileID: 7848958950099731326}
   - component: {fileID: 789829948225012286}
   m_Layer: 0
@@ -648,18 +647,6 @@ MonoBehaviour:
   slots: []
   gold: 0
   startingWeapon: {fileID: 11400000, guid: d5151d40afc56f249a58dd28d2803460, type: 2}
---- !u!114 &1465517786698470501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8038328745804696601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01e14469c166cbe459a1bde0438ef14b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!114 &7848958950099731326
 MonoBehaviour:
   m_ObjectHideFlags: 0

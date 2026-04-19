@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CharacterEquipment : MonoBehaviour
 {
-    //TODO instead of 1 armor handle 1 for each armor type enum
     [Header("Equipped Items")]
     [SerializeField] private WeaponItemData equippedWeapon;
     [SerializeField] private ArmorItemData equippedArmor;
@@ -11,9 +10,11 @@ public class CharacterEquipment : MonoBehaviour
     [SerializeField] private Transform weaponSocket;
     [SerializeField] private Transform armorSocket;
 
-    // Prefabs
     private GameObject equippedWeaponInstance;
     private GameObject equippedArmorInstance;
+
+    private int equippedWeaponSlotIndex = -1;
+    private int equippedArmorSlotIndex = -1;
 
     public WeaponItemData EquippedWeapon => equippedWeapon;
     public ArmorItemData EquippedArmor => equippedArmor;
@@ -28,29 +29,40 @@ public class CharacterEquipment : MonoBehaviour
         RefreshArmorVisual();
     }
 
-    public void EquipWeapon(WeaponItemData newWeapon)
+    public bool ToggleEquip(ItemData item, int slotIndex)
     {
-        equippedWeapon = newWeapon;
-        RefreshWeaponVisual();
-    }
+        if (item == null)
+            return false;
 
-    public void UnequipWeapon()
-    {
-        equippedWeapon = null;
-        RefreshWeaponVisual();
-    }
+        if (item is WeaponItemData weapon)
+        {
+            if (equippedWeapon == weapon && equippedWeaponSlotIndex == slotIndex)
+            {
+                UnequipWeaponInternal();
+            }
+            else
+            {
+                EquipWeaponInternal(weapon, slotIndex);
+            }
 
-    //TODO make more generic, just 1 method for equip is all thats needed
-    public void EquipArmor(ArmorItemData newArmor)
-    {
-        equippedArmor = newArmor;
-        RefreshArmorVisual();
-    }
+            return true;
+        }
 
-    public void UnequipArmor()
-    {
-        equippedArmor = null;
-        RefreshArmorVisual();
+        if (item is ArmorItemData armor)
+        {
+            if (equippedArmor == armor && equippedArmorSlotIndex == slotIndex)
+            {
+                UnequipArmorInternal();
+            }
+            else
+            {
+                EquipArmorInternal(armor, slotIndex);
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     public bool IsItemEquipped(ItemData item)
@@ -58,7 +70,47 @@ public class CharacterEquipment : MonoBehaviour
         if (item == null)
             return false;
 
-        return equippedWeapon == item || equippedArmor == item;
+        if (item is WeaponItemData weapon)
+            return equippedWeapon == weapon;
+
+        if (item is ArmorItemData armor)
+            return equippedArmor == armor;
+
+        return false;
+    }
+
+    public bool IsSlotEquipped(int slotIndex)
+    {
+        return slotIndex >= 0 &&
+               (slotIndex == equippedWeaponSlotIndex || slotIndex == equippedArmorSlotIndex);
+    }
+
+    private void EquipWeaponInternal(WeaponItemData newWeapon, int slotIndex)
+    {
+        equippedWeapon = newWeapon;
+        equippedWeaponSlotIndex = slotIndex;
+        RefreshWeaponVisual();
+    }
+
+    private void UnequipWeaponInternal()
+    {
+        equippedWeapon = null;
+        equippedWeaponSlotIndex = -1;
+        RefreshWeaponVisual();
+    }
+
+    private void EquipArmorInternal(ArmorItemData newArmor, int slotIndex)
+    {
+        equippedArmor = newArmor;
+        equippedArmorSlotIndex = slotIndex;
+        RefreshArmorVisual();
+    }
+
+    private void UnequipArmorInternal()
+    {
+        equippedArmor = null;
+        equippedArmorSlotIndex = -1;
+        RefreshArmorVisual();
     }
 
     private void RefreshWeaponVisual()
@@ -84,11 +136,7 @@ public class CharacterEquipment : MonoBehaviour
             return;
         }
 
-        equippedWeaponInstance = Instantiate(
-            equippedWeapon.EquippedPrefab,
-            weaponSocket
-        );
-
+        equippedWeaponInstance = Instantiate(equippedWeapon.EquippedPrefab, weaponSocket);
         equippedWeaponInstance.transform.localPosition = Vector3.zero;
         equippedWeaponInstance.transform.localRotation = Quaternion.identity;
         equippedWeaponInstance.transform.localScale = Vector3.one;
@@ -117,11 +165,7 @@ public class CharacterEquipment : MonoBehaviour
             return;
         }
 
-        equippedArmorInstance = Instantiate(
-            equippedArmor.EquippedPrefab,
-            armorSocket
-        );
-
+        equippedArmorInstance = Instantiate(equippedArmor.EquippedPrefab, armorSocket);
         equippedArmorInstance.transform.localPosition = Vector3.zero;
         equippedArmorInstance.transform.localRotation = Quaternion.identity;
         equippedArmorInstance.transform.localScale = Vector3.one;
