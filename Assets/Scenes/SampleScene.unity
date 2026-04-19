@@ -3488,8 +3488,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   enemyPrefab: {fileID: 1802467558904152243, guid: e39cb86ab82d6674aac06f088f77aa95, type: 3}
-  maxAlive: 4
-  respawnDelay: 30
+  maxAlive: 5
+  respawnDelay: 10
   useSpawnPoints: 1
   spawnPoints:
   - {fileID: 709935749}

@@ -18,25 +18,36 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private bool spawnOnStart = true;
 
     private readonly List<SpawnedEnemyInstance> aliveEnemies = new();
+    private readonly Dictionary<SpawnedEnemyInstance, int> aliveSpawnPointIndices = new();
 
     private void Start()
     {
         if (!spawnOnStart)
-        {
             return;
-        }
 
         SpawnInitialEnemies();
     }
 
     private void SpawnInitialEnemies()
     {
-        int spawnCount = Mathf.Max(0, maxAlive);
+        int spawnCount = GetInitialSpawnCount();
 
         for (int i = 0; i < spawnCount; i++)
         {
             SpawnEnemy();
         }
+    }
+
+    private int GetInitialSpawnCount()
+    {
+        int desiredCount = Mathf.Max(0, maxAlive);
+
+        if (useSpawnPoints && spawnPoints != null && spawnPoints.Length > 0)
+        {
+            return Mathf.Min(desiredCount, spawnPoints.Length);
+        }
+
+        return desiredCount;
     }
 
     private void SpawnEnemy()
@@ -47,12 +58,26 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
-        if (aliveEnemies.Count >= maxAlive)
-        {
+        if (aliveEnemies.Count >= GetMaxAllowedAliveCount())
             return;
+
+        Vector3 spawnPosition;
+        int spawnPointIndex = -1;
+
+        if (useSpawnPoints && spawnPoints != null && spawnPoints.Length > 0)
+        {
+            if (!TryGetFreeSpawnPoint(out spawnPointIndex, out Transform chosenPoint))
+            {
+                return;
+            }
+
+            spawnPosition = chosenPoint.position;
+        }
+        else
+        {
+            spawnPosition = GetRandomSpawnPosition();
         }
 
-        Vector3 spawnPosition = GetSpawnPosition();
         GameObject enemyObject = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
 
         SpawnedEnemyInstance spawnedInstance = enemyObject.GetComponent<SpawnedEnemyInstance>();
@@ -63,16 +88,69 @@ public class EnemySpawner : MonoBehaviour
 
         spawnedInstance.Initialize(this);
         aliveEnemies.Add(spawnedInstance);
+
+        if (spawnPointIndex >= 0)
+        {
+            aliveSpawnPointIndices[spawnedInstance] = spawnPointIndex;
+        }
     }
 
-    private Vector3 GetSpawnPosition()
+    private int GetMaxAllowedAliveCount()
     {
         if (useSpawnPoints && spawnPoints != null && spawnPoints.Length > 0)
         {
-            Transform chosenPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-            return chosenPoint.position;
+            return Mathf.Min(maxAlive, spawnPoints.Length);
         }
 
+        return Mathf.Max(0, maxAlive);
+    }
+
+    private bool TryGetFreeSpawnPoint(out int freeIndex, out Transform freePoint)
+    {
+        freeIndex = -1;
+        freePoint = null;
+
+        List<int> freeIndices = GetFreeSpawnPointIndices();
+
+        if (freeIndices.Count == 0)
+            return false;
+
+        freeIndex = freeIndices[Random.Range(0, freeIndices.Count)];
+        freePoint = spawnPoints[freeIndex];
+        return true;
+    }
+
+    private List<int> GetFreeSpawnPointIndices()
+    {
+        List<int> freeIndices = new();
+
+        for (int i = 0; i < spawnPoints.Length; i++)
+        {
+            if (spawnPoints[i] == null)
+                continue;
+
+            bool isOccupied = false;
+
+            foreach (int usedIndex in aliveSpawnPointIndices.Values)
+            {
+                if (usedIndex == i)
+                {
+                    isOccupied = true;
+                    break;
+                }
+            }
+
+            if (!isOccupied)
+            {
+                freeIndices.Add(i);
+            }
+        }
+
+        return freeIndices;
+    }
+
+    private Vector3 GetRandomSpawnPosition()
+    {
         Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
         Vector3 localOffset = new Vector3(randomCircle.x, 0f, randomCircle.y);
         return transform.position + localOffset;
@@ -81,11 +159,11 @@ public class EnemySpawner : MonoBehaviour
     public void NotifyEnemyDied(SpawnedEnemyInstance deadEnemy)
     {
         if (deadEnemy == null)
-        {
             return;
-        }
 
         aliveEnemies.Remove(deadEnemy);
+        aliveSpawnPointIndices.Remove(deadEnemy);
+
         StartCoroutine(RespawnAfterDelay());
     }
 
@@ -93,7 +171,7 @@ public class EnemySpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(respawnDelay);
 
-        if (aliveEnemies.Count < maxAlive)
+        if (aliveEnemies.Count < GetMaxAllowedAliveCount())
         {
             SpawnEnemy();
         }
