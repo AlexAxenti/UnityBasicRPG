@@ -2,52 +2,60 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    private CharacterStats characterStats;
     private CharacterEquipment characterEquipment;
     private CharacterCombat combat;
+    private CharacterMotor motor;
 
     private Transform targetTransform;
 
     private void Awake()
     {
-        characterStats = GetComponent<CharacterStats>();
         characterEquipment = GetComponent<CharacterEquipment>();
         combat = GetComponent<CharacterCombat>();
+        motor = GetComponent<CharacterMotor>();
 
-        if (characterStats == null)
-            Debug.LogError($"CharacterStats missing on {gameObject.name}");
+        if (characterEquipment == null)
+            Debug.LogError($"CharacterEquipment missing on {gameObject.name}");
 
         if (combat == null)
             Debug.LogError($"CharacterCombat missing on {gameObject.name}");
+
+        if (motor == null)
+            Debug.LogError($"CharacterMotor missing on {gameObject.name}");
     }
 
     private void Update()
     {
         if (targetTransform == null)
+        {
+            motor.SetMoveDirection(Vector3.zero);
+            motor.Move();
             return;
-
-        float distance = Vector3.Distance(transform.position, targetTransform.position);
-
-        if (distance > characterEquipment.AttackRange)
-        {
-            MoveTowardTarget();
         }
-        else
+
+        Vector3 toTarget = targetTransform.position - transform.position;
+        toTarget.y = 0f;
+
+        float distance = toTarget.magnitude;
+        Vector3 direction = distance > 0.001f ? toTarget.normalized : Vector3.zero;
+
+        bool inAttackRange = distance <= characterEquipment.AttackRange;
+
+        if (!inAttackRange)
         {
+            motor.FaceDirection(direction);
+            motor.SetMoveDirection(direction);
+            motor.Move();
+            return;
+        }
+
+        motor.SetMoveDirection(Vector3.zero);
+        motor.Move();
+
+        if (!combat.IsAttacking)
+        {
+            motor.FaceDirection(direction);
             combat.TryAttack();
-        }
-    }
-
-    private void MoveTowardTarget()
-    {
-        Vector3 direction = (targetTransform.position - transform.position).normalized;
-        direction.y = 0f;
-
-        transform.position += direction * characterStats.MovementSpeed * Time.deltaTime;
-
-        if (direction != Vector3.zero)
-        {
-            transform.forward = direction;
         }
     }
 

@@ -8,6 +8,8 @@ public class CharacterCombat : MonoBehaviour
     private bool attackWindowOpen;
     private bool hasHitThisSwing;
 
+    public bool IsAttacking { get; private set; }
+
     private CharacterInfo characterInfo; 
     private CharacterStats characterStats;
     private CharacterEquipment equipment;
@@ -30,8 +32,19 @@ public class CharacterCombat : MonoBehaviour
             Debug.LogError($"CharacterInfo missing on {gameObject.name}");
     }
 
+        private void Update()
+    {
+        if (attackWindowOpen && !hasHitThisSwing)
+        {
+            CheckForHit();
+        }
+    }
+
     public bool TryAttack()
     {
+        if (IsAttacking)
+            return false;
+
         if (Time.time < lastAttackTime + attackCooldown)
             return false;
 
@@ -40,23 +53,32 @@ public class CharacterCombat : MonoBehaviour
         return true;
     }
 
+    // Animation Event
+    public void StartAttack()
+    {
+        IsAttacking = true;
+        hasHitThisSwing = false;
+        attackWindowOpen = false;
+    }
+
+    // Animation Event
     public void StartAttackWindow()
     {
         attackWindowOpen = true;
-        hasHitThisSwing = false;
     }
 
+    // Animation Event
     public void EndAttackWindow()
     {
         attackWindowOpen = false;
     }
 
-    private void Update()
+    // Animation Event
+    public void EndAttack()
     {
-        if (attackWindowOpen && !hasHitThisSwing)
-        {
-            CheckForHit();
-        }
+        IsAttacking = false;
+        attackWindowOpen = false;
+        hasHitThisSwing = false;
     }
 
     private void CheckForHit()

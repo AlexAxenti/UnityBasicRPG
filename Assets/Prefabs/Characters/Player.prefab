@@ -451,10 +451,10 @@ GameObject:
   - component: {fileID: 5396636225462630862}
   - component: {fileID: 678428262995541748}
   - component: {fileID: 4600383437065725788}
-  - component: {fileID: 8017188141163531681}
   - component: {fileID: 4231343594298194238}
   - component: {fileID: 1465517786698470501}
   - component: {fileID: 7848958950099731326}
+  - component: {fileID: 789829948225012286}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -587,7 +587,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb56594acb22fb43ae482dfe7dadaec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  gravity: -9.81
   cameraTransform: {fileID: 0}
   cameraFollow: {fileID: 0}
 --- !u!114 &5396636225462630862
@@ -633,18 +632,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterCombat
   attackCooldown: 0.5
---- !u!114 &8017188141163531681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8038328745804696601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 372f38b6134a4d14683b65e58444dfea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerCombatInput
 --- !u!114 &4231343594298194238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,6 +680,27 @@ MonoBehaviour:
     m_Bits: 64
   detectionOrigin: {fileID: 872548807408351170}
   promptUI: {fileID: 0}
+--- !u!114 &789829948225012286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8038328745804696601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 863ebce131012a1488e389527d46fb0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterMotor
+  gravity: -9.81
+  groundedStickForce: -2
+  forwardMultiplier: 1
+  strafeMultiplier: 0.85
+  backwardMultiplier: 0.7
+  rotationSpeed: 720
+  dashDistance: 3
+  dashDuration: 0.12
+  dashCooldown: 1.25
 --- !u!1 &8194150415973602168
 GameObject:
   m_ObjectHideFlags: 0
