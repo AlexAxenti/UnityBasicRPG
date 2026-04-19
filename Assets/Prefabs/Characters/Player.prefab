@@ -617,7 +617,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterEquipment
   equippedWeapon: {fileID: 0}
+  equippedArmor: {fileID: 0}
   weaponSocket: {fileID: 6509883418211902804}
+  armorSocket: {fileID: 3685200580417781928}
 --- !u!114 &4600383437065725788
 MonoBehaviour:
   m_ObjectHideFlags: 0

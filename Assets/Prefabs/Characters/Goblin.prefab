@@ -612,7 +612,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterEquipment
   equippedWeapon: {fileID: 11400000, guid: a91a9175d8e038a4db4a2a82da753a3d, type: 2}
+  equippedArmor: {fileID: 0}
   weaponSocket: {fileID: 1228895849311160099}
+  armorSocket: {fileID: 0}
 --- !u!114 &830015799271003084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,6 +666,10 @@ MonoBehaviour:
     dropChance: 1
     minQuantity: 2
     maxQuantity: 10
+  - item: {fileID: 11400000, guid: cb260a2ccdc8cf741b661439b5bd5108, type: 2}
+    dropChance: 1
+    minQuantity: 1
+    maxQuantity: 1
 --- !u!114 &171433240075413698
 MonoBehaviour:
   m_ObjectHideFlags: 0

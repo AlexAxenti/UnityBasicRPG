@@ -17,6 +17,7 @@ public class CharacterHealth : MonoBehaviour
     public float CurrentHealth => currentHealth;
     public float MaxHealth => characterStats != null ? characterStats.MaxHealth : 0f;
 
+    //TODO generic might be removable?
     public event Action<CharacterHealth> OnDied;
     private bool isDead;
     public bool IsDead => isDead;
