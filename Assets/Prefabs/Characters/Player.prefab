@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 789829948225012286}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -586,8 +586,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb56594acb22fb43ae482dfe7dadaec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  cameraTransform: {fileID: 0}
-  cameraFollow: {fileID: 0}
 --- !u!114 &5396636225462630862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665,8 +663,6 @@ MonoBehaviour:
   inspectableLayers:
     serializedVersion: 2
     m_Bits: 64
-  detectionOrigin: {fileID: 872548807408351170}
-  promptUI: {fileID: 0}
 --- !u!114 &789829948225012286
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public abstract class Inspectable : MonoBehaviour
+public class Inspectable : MonoBehaviour
 {
     [Header("Display")]
     [SerializeField] private string label = "Inspect";
@@ -25,5 +25,8 @@ public abstract class Inspectable : MonoBehaviour
         label = newLabel;
     }
 
-    public abstract void Interact(PlayerInteractor interactor);
+    public virtual void Interact(PlayerInteractor interactor)
+    {
+        // Default interaction behavior can be defined here.
+    }
 }
