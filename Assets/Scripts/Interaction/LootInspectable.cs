@@ -3,8 +3,14 @@ using UnityEngine;
 public class LootInspectable : Inspectable
 {
     [SerializeField] private LootContainer lootPouch;
+    private InventoryWindowController inventoryWindowController;
 
-    private void Reset()
+    private void Awake()
+    {
+        inventoryWindowController = FindAnyObjectByType<InventoryWindowController>();  
+    }
+
+  private void Reset()
     {
         lootPouch = GetComponent<LootContainer>();
     }
@@ -25,6 +31,17 @@ public class LootInspectable : Inspectable
             return;
         }
 
-        lootPouch.LootAll(playerInventory);
+        // lootPouch.LootAll(playerInventory);
+        
+        if (inventoryWindowController == null)
+            return;
+
+        if (inventoryWindowController.IsLootOpen && inventoryWindowController.ActiveLootContainer == lootPouch)
+        {
+            inventoryWindowController.CloseAll();
+            return;
+        }
+
+        inventoryWindowController.OpenLoot(lootPouch);
     }
 }

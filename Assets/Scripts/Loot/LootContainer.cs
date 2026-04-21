@@ -36,6 +36,29 @@ public class LootContainer : MonoBehaviour
         }
     }
 
+    public bool TakeItemAt(int slotIndex, PlayerInventory playerInventory)
+    {
+        if (playerInventory == null) return false;
+        if (slotIndex < 0 || slotIndex >= storedItems.Count) return false;
+
+        InventorySlot slot = storedItems[slotIndex];
+        if (slot == null || slot.IsEmpty) return false;
+
+        bool added = playerInventory.AddItem(slot.item, slot.quantity);
+
+        if (added)
+        {
+            Debug.Log($"Picked up {slot.quantity}x {slot.item.itemName}");
+            storedItems.RemoveAt(slotIndex);
+
+            if (storedItems.Count == 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+        return added;
+    }
+
     public void LootAll(PlayerInventory playerInventory)
     {
         if (playerInventory == null) return;
