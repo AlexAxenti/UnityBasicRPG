@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     private CharacterMotor motor;
     private CharacterCombat combat;
 
+    private bool inputBlocked;
+
     private void Awake()
     {
         motor = GetComponent<CharacterMotor>();
@@ -33,6 +35,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (inputBlocked)
+            return;
+
         Vector2 moveInput = ReadMoveInput();
         Vector3 moveDirection = GetCameraRelativeMoveDirection(moveInput);
 
@@ -122,5 +127,10 @@ public class PlayerController : MonoBehaviour
             Vector3 dashDirection = moveDirection.sqrMagnitude > 0.001f ? moveDirection : transform.forward;
             motor.TryDash(dashDirection);
         }
+    }
+
+    public void SetInputBlocked(bool blocked)
+    {
+        inputBlocked = blocked;
     }
 }
