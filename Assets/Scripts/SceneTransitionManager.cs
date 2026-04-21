@@ -16,7 +16,6 @@ public class SceneTransitionManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -31,7 +30,7 @@ public class SceneTransitionManager : MonoBehaviour
         if (string.IsNullOrEmpty(pendingSpawnId))
             return;
 
-        SceneSpawnPoint[] spawnPoints = FindObjectsByType<SceneSpawnPoint>(FindObjectsSortMode.None);
+        SceneSpawnPoint[] spawnPoints = FindObjectsByType<SceneSpawnPoint>();
 
         foreach (SceneSpawnPoint spawnPoint in spawnPoints)
         {

@@ -580,7 +580,7 @@ MonoBehaviour:
   level: 1
   baseMaxHealth: 50
   baseDamage: 5
-  baseAttackRange: 1
+  baseAttackRange: 1.5
   baseArmor: 5
   baseMovementSpeed: 4.5
   maxHealthPerLevel: 10

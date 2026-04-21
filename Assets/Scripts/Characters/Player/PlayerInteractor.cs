@@ -5,6 +5,7 @@ public class PlayerInteractor : MonoBehaviour
 {
     [Header("Detection")]
     [SerializeField] private float inspectRadius = 2f;
+    //TODO remove if no uses found
     [SerializeField] private float maxInspectDistance = 2.5f;
     [SerializeField] private float forwardDotThreshold = 0.4f;
     [SerializeField] private LayerMask inspectableLayers;
@@ -40,7 +41,12 @@ public class PlayerInteractor : MonoBehaviour
         currentInspectable = null;
 
         Vector3 origin = detectionOrigin != null ? detectionOrigin.position : transform.position;
-        Collider[] hits = Physics.OverlapSphere(origin, inspectRadius, inspectableLayers);
+        Collider[] hits = Physics.OverlapSphere(
+            origin,
+            inspectRadius,
+            inspectableLayers,
+            QueryTriggerInteraction.Collide
+        );
 
         float bestScore = float.MinValue;
 
@@ -49,7 +55,9 @@ public class PlayerInteractor : MonoBehaviour
             Inspectable inspectable = hit.GetComponentInParent<Inspectable>();
             if (inspectable == null) continue;
 
-            Vector3 toTarget = inspectable.transform.position - origin;
+            // Vector3 toTarget = inspectable.transform.position - origin;
+            Vector3 closestPoint = hit.ClosestPoint(origin);
+            Vector3 toTarget = closestPoint - origin;
             float distance = toTarget.magnitude;
             if (distance > maxInspectDistance) continue;
 

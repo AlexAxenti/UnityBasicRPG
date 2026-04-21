@@ -1747,7 +1747,8 @@ GameObject:
   - component: {fileID: 713784844}
   - component: {fileID: 713784843}
   - component: {fileID: 713784842}
-  m_Layer: 0
+  - component: {fileID: 713784847}
+  m_Layer: 6
   m_Name: ForestTeleporter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1861,6 +1862,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 60, z: 0}
+--- !u!114 &713784847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713784841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a47d8918deb76479a6009e52c2318d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inspectable
+  label: Continue to Forest
+  hasInteraction: 0
+  interactionKey: 20
 --- !u!1001 &736303706
 PrefabInstance:
   m_ObjectHideFlags: 0
