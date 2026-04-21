@@ -115,12 +115,19 @@ public class DialogueManager : MonoBehaviour
         dialoguePanelUI.ShowNode(currentNode, this);
     }
 
+    //TODO create a seperate manager for this instead of directly controlling player and camera from dialogue manager
     private void SetGameplayLocked(bool locked)
     {
         PlayerController playerController = FindAnyObjectByType<PlayerController>();
         if (playerController != null)
         {
             playerController.SetInputBlocked(locked);
+        }
+
+        CameraFollow cameraFollow = FindAnyObjectByType<CameraFollow>();
+        if (cameraFollow != null)
+        {
+            cameraFollow.SetInputBlocked(locked);
         }
 
         Cursor.lockState = locked ? CursorLockMode.None : CursorLockMode.Locked;

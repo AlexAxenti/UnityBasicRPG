@@ -19,6 +19,8 @@ public class CameraFollow : MonoBehaviour
 
     public float Yaw => yaw;
 
+    private bool inputBlocked;
+
     private void Start()
     {
         if (target != null)
@@ -41,7 +43,7 @@ public class CameraFollow : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (target == null || Mouse.current == null)
+        if (inputBlocked || target == null || Mouse.current == null)
             return;
 
         Vector2 mouseDelta = Mouse.current.delta.ReadValue();
@@ -66,5 +68,10 @@ public class CameraFollow : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+    }
+
+    public void SetInputBlocked(bool blocked)
+    {
+        inputBlocked = blocked;
     }
 }
