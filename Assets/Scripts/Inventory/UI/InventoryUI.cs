@@ -394,7 +394,7 @@ public class InventoryUI : MonoBehaviour
 
         if (boundLootContainer.IsEmpty)
         {
-            FindFirstObjectByType<InventoryWindowController>()?.CloseAll();
+            FindAnyObjectByType<InventoryWindowController>()?.CloseAll();
         }
     }
 }
