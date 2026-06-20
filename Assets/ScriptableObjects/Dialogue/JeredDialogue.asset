@@ -16,18 +16,24 @@ MonoBehaviour:
   nodes:
   - nodeId: Start
     speakerName: Jered
-    dialogueText: Hello traveler, welcome to our village!
+    dialogueText: 'Hello traveler, welcome to our village!
+
+      I''m Jered the
+      local salesman!'
     choices:
-    - choiceText: Who are you?
-      nextNodeId: WhoAreYou
+    - choiceText: What do you have for sale?
+      nextNodeId: Shopping
       endsDialogue: 0
+      actionType: 1
     - choiceText: Goodbye.
       nextNodeId: 
       endsDialogue: 1
-  - nodeId: WhoAreYou
+      actionType: 0
+  - nodeId: Shopping
     speakerName: Jered
-    dialogueText: I'm the town's chef, preparing for lunch!
+    dialogueText: 'Here''s my wares:'
     choices:
-    - choiceText: Yum!
+    - choiceText: Thank you!
       nextNodeId: 
       endsDialogue: 1
+      actionType: 0

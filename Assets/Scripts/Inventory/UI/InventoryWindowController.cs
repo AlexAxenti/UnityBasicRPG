@@ -12,6 +12,7 @@ public class InventoryWindowController : MonoBehaviour
     [Header("Titles")]
     [SerializeField] private string playerPanelTitle = "Inventory";
     [SerializeField] private string lootPanelTitle = "Loot";
+    [SerializeField] private string shopPanelTitle = "Shop";
 
     private LootContainer activeLootContainer;
 
@@ -66,6 +67,25 @@ public class InventoryWindowController : MonoBehaviour
 
         otherPanel.BindLoot(loot, playerInventory, lootPanelTitle);
         otherPanel.SetMode(InventoryPanelMode.LootSource);
+
+        playerPanel.Show();
+        otherPanel.Show();
+    }
+
+    public void OpenShop(ShopService shopService)
+    {
+        if (shopService == null || playerPanel == null || otherPanel == null || playerInventory == null)
+        {
+            Debug.LogWarning("OpenShop missing references.");
+            return;
+        }
+
+        playerPanel.SetMode(InventoryPanelMode.PlayerWhileShopping);
+        playerPanel.BindPlayerInventory(playerInventory, playerPanelTitle);
+        playerPanel.BindShopContext(shopService);
+
+        otherPanel.SetMode(InventoryPanelMode.ShopStock);
+        otherPanel.BindShop(shopService, playerInventory, shopPanelTitle);
 
         playerPanel.Show();
         otherPanel.Show();

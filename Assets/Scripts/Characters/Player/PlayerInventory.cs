@@ -130,4 +130,16 @@ public class PlayerInventory : MonoBehaviour
     {
         gold += Mathf.Max(0, amount);
     }
+
+    public bool RemoveGold(int amount)
+    {
+        if (amount <= 0)
+            return false;
+
+        if (gold < amount)
+            return false;
+
+        gold -= amount;
+        return true;
+    }
 }

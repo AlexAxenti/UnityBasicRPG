@@ -30,6 +30,8 @@ public class InventoryUI : MonoBehaviour
     private bool showGold;
     private string currentTitle = "Inventory";
 
+    private ShopService boundShopService;
+    private List<InventorySlot> currentShopDisplaySlots;
     private LootContainer boundLootContainer;
     private PlayerInventory boundPlayerInventory;
     private InventoryUI linkedPanel;
@@ -143,6 +145,30 @@ public class InventoryUI : MonoBehaviour
         BindInventory(loot.StoredItems, loot.StoredItems.Count);
     }
 
+    public void BindShop(ShopService shopService,  PlayerInventory buyerInventory, string title = "Shop")
+    {
+        if (shopService == null || shopService.ShopInventory == null)
+        {
+            Debug.LogWarning("BindShop called with invalid shop service.", this);
+            return;
+        }
+
+        boundLootContainer = null;
+        boundShopService = shopService;
+        boundPlayerInventory = buyerInventory;
+
+        currentTitle = title;
+        showGold = false;
+
+        currentShopDisplaySlots = shopService.ShopInventory.BuildBaseStockDisplaySlots();
+        BindInventory(currentShopDisplaySlots, currentShopDisplaySlots.Count);
+    }
+
+    public void BindShopContext(ShopService shopService)
+    {
+        boundShopService = shopService;
+    }
+
     public void BindInventory(IReadOnlyList<InventorySlot> slots, int maxSlots)
     {
         currentSlots = slots ?? System.Array.Empty<InventorySlot>();
@@ -254,6 +280,7 @@ public class InventoryUI : MonoBehaviour
         {
             case InventoryPanelMode.Player:
             case InventoryPanelMode.PlayerWhileLooting:
+            case InventoryPanelMode.PlayerWhileShopping:
                 ShowPlayerContextMenu(slotIndex, slot);
                 break;
 
@@ -262,7 +289,6 @@ public class InventoryUI : MonoBehaviour
                 break;
 
             case InventoryPanelMode.ShopStock:
-            case InventoryPanelMode.PlayerWhileShopping:
                 ShowShopContextMenu(slotIndex, slot);
                 break;
         }
@@ -293,6 +319,30 @@ public class InventoryUI : MonoBehaviour
             return;
 
         ItemData item = slot.item;
+
+        if (panelMode == InventoryPanelMode.PlayerWhileShopping)
+        {
+            Vector2 mousePosition = Mouse.current.position.ReadValue();
+
+            itemContextMenuUI.Show(
+                mousePosition,
+                "Sell",
+                () =>
+                {
+                    if (boundShopService == null || boundPlayerInventory == null)
+                        return;
+
+                    bool sold = boundShopService.TrySellItem(item, 1, boundPlayerInventory);
+
+                    if (sold)
+                    {
+                        RefreshUI();
+                        linkedPanel?.RefreshUI();
+                    }
+                });
+
+            return;
+        }
 
         if (characterEquipment != null && IsEquippable(item))
         {
@@ -328,7 +378,30 @@ public class InventoryUI : MonoBehaviour
 
     private void ShowShopContextMenu(int slotIndex, InventorySlot slot)
     {
-        Debug.Log("Shop context menu not implemented yet.");
+        if (slot == null || slot.IsEmpty)
+            return;
+
+        if (boundShopService == null || boundPlayerInventory == null)
+        {
+            Debug.LogWarning("Shop panel is missing bindings.", this);
+            return;
+        }
+
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
+
+        itemContextMenuUI.Show(
+            mousePosition,
+            "Buy",
+            () =>
+            {
+                bool bought = boundShopService.TryBuyBaseStockItem(slotIndex, boundPlayerInventory);
+
+                if (bought)
+                {
+                    linkedPanel?.RefreshUI();
+                    RefreshUI();
+                }
+            });
     }
 
     private InventorySlot GetSlotAt(int slotIndex)

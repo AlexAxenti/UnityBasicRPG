@@ -12,6 +12,7 @@ public class DialogueManager : MonoBehaviour
 
     private DialogueData currentDialogue;
     private DialogueNodeData currentNode;
+    private DialogueInspectable currentDialogueSource;
 
     public bool IsDialogueOpen => isDialogueOpen;
 
@@ -34,7 +35,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartDialogue(DialogueData dialogueData)
+    public void StartDialogue(DialogueData dialogueData, DialogueInspectable dialogueSource)
     {
         if (dialogueData == null)
         {
@@ -43,6 +44,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         currentDialogue = dialogueData;
+        currentDialogueSource = dialogueSource;
         currentNode = currentDialogue.GetNodeById(currentDialogue.startingNodeId);
 
         if (currentNode == null)
@@ -63,6 +65,8 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("Selected choice was null.");
             return;
         }
+
+        ExecuteChoiceAction(choice);
 
         if (choice.endsDialogue)
         {
@@ -94,11 +98,20 @@ public class DialogueManager : MonoBehaviour
     {
         isDialogueOpen = false;
         currentDialogue = null;
+        currentDialogueSource = null;
         currentNode = null;
 
         if (dialoguePanelUI != null)
         {
             dialoguePanelUI.Hide();
+        }
+
+        InventoryWindowController inventoryWindowController = FindAnyObjectByType<InventoryWindowController>();
+
+        if (inventoryWindowController != null)
+        {
+            // Debug.LogWarning("No InventoryWindowController found in scene.");
+            inventoryWindowController.CloseAll();
         }
 
         SetGameplayLocked(false);
@@ -132,5 +145,46 @@ public class DialogueManager : MonoBehaviour
 
         Cursor.lockState = locked ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = locked;
+    }
+
+    private void ExecuteChoiceAction(DialogueChoiceData choice)
+    {
+        switch (choice.actionType)
+        {
+            case DialogueActionType.None:
+                break;
+
+            case DialogueActionType.OpenShop:
+                OpenShopFromCurrentSource();
+                break;
+        }
+    }
+
+    private void OpenShopFromCurrentSource()
+    {
+        if (currentDialogueSource == null)
+        {
+            Debug.LogWarning("Tried to open shop, but current dialogue source was null.");
+            return;
+        }
+
+        ShopService shopService = currentDialogueSource.GetComponent<ShopService>();
+
+        if (shopService == null)
+        {
+            Debug.LogWarning($"Dialogue source '{currentDialogueSource.name}' has no ShopService.");
+            return;
+        }
+
+        InventoryWindowController inventoryWindowController = FindAnyObjectByType<InventoryWindowController>();
+
+        if (inventoryWindowController == null)
+        {
+            Debug.LogWarning("No InventoryWindowController found in scene.");
+            return;
+        }
+
+        // EndDialogue();
+        inventoryWindowController.OpenShop(shopService);
     }
 }

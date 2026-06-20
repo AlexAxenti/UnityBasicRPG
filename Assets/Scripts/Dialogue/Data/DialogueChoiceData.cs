@@ -12,4 +12,7 @@ public class DialogueChoiceData
 
     [Tooltip("If true, dialogue ends after selecting this choice.")]
     public bool endsDialogue;
+
+    [Header("Optional Action")]
+    public DialogueActionType actionType = DialogueActionType.None;
 }

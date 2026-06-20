@@ -40,6 +40,6 @@ public class DialogueInspectable : Inspectable
             return;
         }
 
-        DialogueManager.Instance.StartDialogue(dialogueData);
+        DialogueManager.Instance.StartDialogue(dialogueData, this);
     }
 }
