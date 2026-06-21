@@ -389,7 +389,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -750, y: -370}
+  m_AnchoredPosition: {x: -675, y: -370}
   m_SizeDelta: {x: 400, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5400247323116898110
@@ -1613,6 +1613,7 @@ MonoBehaviour:
   playerInventory: {fileID: 0}
   playerPanelTitle: Inventory
   lootPanelTitle: Loot
+  shopPanelTitle: Shop
 --- !u!1 &3655198789230195979
 GameObject:
   m_ObjectHideFlags: 0
@@ -3085,6 +3086,7 @@ Transform:
   - {fileID: 5785566583406146023}
   - {fileID: 1026029519002450181}
   - {fileID: 5786246459833322403}
+  - {fileID: 864399614537213232}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &948349964002818391
@@ -4356,6 +4358,52 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &8151697745554169048
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 864399614537213232}
+  - component: {fileID: 6089529918383304806}
+  m_Layer: 0
+  m_Name: QuestManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &864399614537213232
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8151697745554169048}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1757651533820916712}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6089529918383304806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8151697745554169048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88aebefc4fc93074fa36110d4b4987c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestManager
+  availableQuests:
+  - {fileID: 11400000, guid: 58eeb0016f5cc3644b4c6135f5a41274, type: 2}
 --- !u!1 &8168511009750128878
 GameObject:
   m_ObjectHideFlags: 0
@@ -4763,7 +4811,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1898621883225871479}
   m_HandleRect: {fileID: 1335114063169124599}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5336,7 +5384,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 663181750962803749}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999976
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

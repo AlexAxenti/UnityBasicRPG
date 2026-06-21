@@ -157,6 +157,19 @@ public class DialogueManager : MonoBehaviour
             case DialogueActionType.OpenShop:
                 OpenShopFromCurrentSource();
                 break;
+
+            case DialogueActionType.StartQuest:
+                QuestManager.Instance?.StartQuest(choice.questId);
+                break;
+
+            case DialogueActionType.EmitQuestEvent:
+                QuestEventBus.Raise(new QuestEvent(
+                    choice.questEventType,
+                    choice.questEventTargetId,
+                    choice.questEventAmount
+                ));
+                break;
+
         }
     }
 

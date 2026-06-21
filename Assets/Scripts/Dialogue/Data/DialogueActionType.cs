@@ -1,5 +1,7 @@
 public enum DialogueActionType
 {
     None,
-    OpenShop
+    OpenShop,
+    StartQuest,
+    EmitQuestEvent
 }

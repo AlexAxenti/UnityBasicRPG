@@ -40,6 +40,11 @@ public class DialoguePanelUI : MonoBehaviour
 
         for (int i = 0; i < node.choices.Count; i++)
         {
+            if (!node.choices[i].CanShow())
+            {
+                continue;
+            }
+            
             DialogueChoiceButtonUI button = Instantiate(choiceButtonPrefab, choicesContainer);
             button.Setup(node.choices[i], dialogueManager);
             spawnedButtons.Add(button);

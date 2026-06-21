@@ -459,6 +459,7 @@ GameObject:
   - component: {fileID: 9070842082720857656}
   - component: {fileID: 171433240075413698}
   - component: {fileID: 2813898999947361700}
+  - component: {fileID: 2416347679502971095}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -729,6 +730,21 @@ MonoBehaviour:
   dashDistance: 3
   dashDuration: 0.12
   dashCooldown: 1.25
+--- !u!114 &2416347679502971095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802467558904152243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a42f30fd9faa5140b427a5c0f65c2b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestEventOnDeath
+  questEventType: 1
+  questEventTargetId: goblin
+  questEventAmount: 1
 --- !u!1 &1910618689580537667
 GameObject:
   m_ObjectHideFlags: 0

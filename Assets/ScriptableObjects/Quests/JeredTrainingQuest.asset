@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 283384e29253db24e8dd4fee9750a672, type: 3}
+  m_Name: JeredTrainingQuest
+  m_EditorClassIdentifier: Assembly-CSharp::QuestData
+  questId: jered_training
+  questTitle: Jered's Training
+  description: Jered wants to show you how to fend for yourself!
+  isRepeatable: 0
+  goldReward: 25
+  experienceReward: 100
+  steps:
+  - stepId: pick_wooden_bat_for_jered
+    description: Pick up the wooden bat.
+    objective:
+      eventType: 0
+      targetId: pick_wooden_bat_for_jered_obj
+      requiredAmount: 1
+      description: Pick up the wooden bat beside Jered.
+  - stepId: return_to_jared_1
+    description: Return to Jered with your new wooden bat.
+    objective:
+      eventType: 2
+      targetId: return_to_jared_1_obj
+      requiredAmount: 1
+      description: Return to Jered with your new wooden bat.
+  - stepId: kill_goblins_for_jered
+    description: Kill 3 goblins in the forest.
+    objective:
+      eventType: 1
+      targetId: goblin
+      requiredAmount: 3
+      description: Kill 3 goblins in the forest.
+  - stepId: return_to_jered_2
+    description: Return to Jered.
+    objective:
+      eventType: 2
+      targetId: return_to_jered_2_obj
+      requiredAmount: 1
+      description: Return to Jered.

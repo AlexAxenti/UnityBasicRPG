@@ -25,10 +25,57 @@ MonoBehaviour:
       nextNodeId: Shopping
       endsDialogue: 0
       actionType: 1
+      questId: 
+      questEventType: 0
+      questEventTargetId: 
+      questEventAmount: 1
+      questConditionType: 0
+      conditionQuestId: 
+      requiredStepIndex: -1
+    - choiceText: Can you help me defeat those goblins in the forest?
+      nextNodeId: start_training
+      endsDialogue: 0
+      actionType: 0
+      questId: 
+      questEventType: 0
+      questEventTargetId: 
+      questEventAmount: 1
+      questConditionType: 1
+      conditionQuestId: jered_training
+      requiredStepIndex: -1
+    - choiceText: I picked up the bat.
+      nextNodeId: kill_goblins_command
+      endsDialogue: 0
+      actionType: 3
+      questId: jered_training
+      questEventType: 2
+      questEventTargetId: return_to_jared_1_obj
+      questEventAmount: 1
+      questConditionType: 2
+      conditionQuestId: jered_training
+      requiredStepIndex: 1
+    - choiceText: I've killed 3 goblins.
+      nextNodeId: training_completed
+      endsDialogue: 0
+      actionType: 3
+      questId: jered_training
+      questEventType: 2
+      questEventTargetId: return_to_jered_2_obj
+      questEventAmount: 1
+      questConditionType: 2
+      conditionQuestId: jered_training
+      requiredStepIndex: 3
     - choiceText: Goodbye.
       nextNodeId: 
       endsDialogue: 1
       actionType: 0
+      questId: 
+      questEventType: 0
+      questEventTargetId: 
+      questEventAmount: 1
+      questConditionType: 0
+      conditionQuestId: 
+      requiredStepIndex: -1
   - nodeId: Shopping
     speakerName: Jered
     dialogueText: 'Here''s my wares:'
@@ -37,3 +84,84 @@ MonoBehaviour:
       nextNodeId: 
       endsDialogue: 1
       actionType: 0
+      questId: 
+      questEventType: 0
+      questEventTargetId: 
+      questEventAmount: 1
+      questConditionType: 0
+      conditionQuestId: 
+      requiredStepIndex: -1
+  - nodeId: start_training
+    speakerName: Jered
+    dialogueText: Of course I can, you can take my bat and head off to the forest!
+      Are you ready?
+    choices:
+    - choiceText: Yes I'm ready!
+      nextNodeId: pick_up_bat_command
+      endsDialogue: 0
+      actionType: 2
+      questId: jered_training
+      questEventType: 2
+      questEventTargetId: 
+      questEventAmount: 1
+      questConditionType: 1
+      conditionQuestId: jered_training
+      requiredStepIndex: -1
+    - choiceText: I think I need a moment
+      nextNodeId: 
+      endsDialogue: 1
+      actionType: 0
+      questId: 
+      questEventType: 0
+      questEventTargetId: 
+      questEventAmount: 1
+      questConditionType: 0
+      conditionQuestId: 
+      requiredStepIndex: -1
+  - nodeId: pick_up_bat_command
+    speakerName: Jered
+    dialogueText: That's the spirit! Grab my bat beside me
+    choices:
+    - choiceText: (end)
+      nextNodeId: 
+      endsDialogue: 1
+      actionType: 0
+      questId: 
+      questEventType: 2
+      questEventTargetId: 
+      questEventAmount: 0
+      questConditionType: 0
+      conditionQuestId: 
+      requiredStepIndex: -1
+  - nodeId: kill_goblins_command
+    speakerName: Jered
+    dialogueText: Now equip that from your inventory (tab) and go kill 3 goblins
+      for me. Be careful out there!
+    choices:
+    - choiceText: (end)
+      nextNodeId: 
+      endsDialogue: 1
+      actionType: 0
+      questId: 
+      questEventType: 2
+      questEventTargetId: 
+      questEventAmount: 1
+      questConditionType: 0
+      conditionQuestId: 
+      requiredStepIndex: -1
+  - nodeId: training_completed
+    speakerName: Jered
+    dialogueText: I knew you had it in you! You know what, keep my bat, you deserve
+      it!
+    choices:
+    - choiceText: Thank you for your help!
+      nextNodeId: 
+      endsDialogue: 1
+      actionType: 0
+      questId: 
+      questEventType: 2
+      questEventTargetId: 
+      questEventAmount: 1
+      questConditionType: 0
+      conditionQuestId: 
+      requiredStepIndex: -1

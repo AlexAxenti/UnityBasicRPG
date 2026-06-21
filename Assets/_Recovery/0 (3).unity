@@ -250,55 +250,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4415611076490568, guid: 94003cdd02bfa0849b07108d63f10e24, type: 3}
   m_PrefabInstance: {fileID: 23640820}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &39348360
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 39348362}
-  - component: {fileID: 39348361}
-  m_Layer: 0
-  m_Name: WoodenBatActivator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &39348361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 39348360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0373c92da10aaa3488efb7546fb3ce01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::QuestWorldActivator
-  targetObject: {fileID: 1263923556}
-  questId: jered_training
-  requiredStatus: 1
-  requiredStepIndex: 0
---- !u!4 &39348362
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 39348360}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40.514, y: 0.129, z: 52.396}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1263923559}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &61461791
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3716,6 +3667,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4257962555416202941, guid: a55a0c9e057bc994ea182b2668dbdccb, type: 3}
   m_PrefabInstance: {fileID: 1011385096}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1023041330 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1757651533820916712, guid: 791e9ba40b941e449bd13b37492edb4e, type: 3}
+  m_PrefabInstance: {fileID: 1472637387}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1036130470
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3974,128 +3930,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2673348564106939249, guid: c305b7f4be3710147a9485b5d3bdf216, type: 3}
   m_PrefabInstance: {fileID: 1253512314}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1263923555
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 39348362}
-    m_Modifications:
-    - target: {fileID: 91975651531460904, guid: 49c293130a972e648a695017349a5b36, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 91975651531460904, guid: 49c293130a972e648a695017349a5b36, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 91975651531460904, guid: 49c293130a972e648a695017349a5b36, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 91975651531460904, guid: 49c293130a972e648a695017349a5b36, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7946393
-      objectReference: {fileID: 0}
-    - target: {fileID: 91975651531460904, guid: 49c293130a972e648a695017349a5b36, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.5858035
-      objectReference: {fileID: 0}
-    - target: {fileID: 91975651531460904, guid: 49c293130a972e648a695017349a5b36, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.12823933
-      objectReference: {fileID: 0}
-    - target: {fileID: 91975651531460904, guid: 49c293130a972e648a695017349a5b36, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.094537295
-      objectReference: {fileID: 0}
-    - target: {fileID: 91975651531460904, guid: 49c293130a972e648a695017349a5b36, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -65.061
-      objectReference: {fileID: 0}
-    - target: {fileID: 91975651531460904, guid: 49c293130a972e648a695017349a5b36, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -48.248
-      objectReference: {fileID: 0}
-    - target: {fileID: 91975651531460904, guid: 49c293130a972e648a695017349a5b36, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 45.451
-      objectReference: {fileID: 0}
-    - target: {fileID: 5211442228440828729, guid: 49c293130a972e648a695017349a5b36, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5554070756066147622, guid: 49c293130a972e648a695017349a5b36, type: 3}
-      propertyPath: m_Name
-      value: WoodenBat
-      objectReference: {fileID: 0}
-    - target: {fileID: 5554070756066147622, guid: 49c293130a972e648a695017349a5b36, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5554070756066147622, guid: 49c293130a972e648a695017349a5b36, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1263923558}
-    - targetCorrespondingSourceObject: {fileID: 5554070756066147622, guid: 49c293130a972e648a695017349a5b36, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1263923560}
-  m_SourcePrefab: {fileID: 100100000, guid: 49c293130a972e648a695017349a5b36, type: 3}
---- !u!1 &1263923556 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5554070756066147622, guid: 49c293130a972e648a695017349a5b36, type: 3}
-  m_PrefabInstance: {fileID: 1263923555}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1263923558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263923556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77ee69e5cba255c40ae1b375bfb3a203, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::QuestItemPickupInspectable
-  label: Loot
-  hasInteraction: 1
-  interactionKey: 20
-  item: {fileID: 11400000, guid: d5151d40afc56f249a58dd28d2803460, type: 2}
-  quantity: 1
-  questEventType: 0
-  questEventTargetId: pick_wooden_bat_for_jered_obj
-  questEventAmount: 1
---- !u!4 &1263923559 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 91975651531460904, guid: 49c293130a972e648a695017349a5b36, type: 3}
-  m_PrefabInstance: {fileID: 1263923555}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1263923560
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263923556}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.5, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1266186478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4913,6 +4747,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1175055823574654339, guid: 791e9ba40b941e449bd13b37492edb4e, type: 3}
+      propertyPath: m_Size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1175055823574654339, guid: 791e9ba40b941e449bd13b37492edb4e, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1335114063169124599, guid: 791e9ba40b941e449bd13b37492edb4e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -4985,6 +4827,10 @@ PrefabInstance:
       propertyPath: characterEquipment
       value: 
       objectReference: {fileID: 2136397237}
+    - target: {fileID: 2795384179891034508, guid: 791e9ba40b941e449bd13b37492edb4e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -675
+      objectReference: {fileID: 0}
     - target: {fileID: 5041531808798222574, guid: 791e9ba40b941e449bd13b37492edb4e, type: 3}
       propertyPath: m_Name
       value: PersistentSystems
@@ -5049,9 +4895,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9128485300352277909, guid: 791e9ba40b941e449bd13b37492edb4e, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1757651533820916712, guid: 791e9ba40b941e449bd13b37492edb4e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1991632254}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 791e9ba40b941e449bd13b37492edb4e, type: 3}
 --- !u!1001 &1490687533
@@ -6699,6 +6552,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &1991632253
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1991632254}
+  - component: {fileID: 1991632255}
+  m_Layer: 0
+  m_Name: QuestManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1991632254
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991632253}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1023041330}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1991632255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991632253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88aebefc4fc93074fa36110d4b4987c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestManager
+  availableQuests:
+  - {fileID: 11400000, guid: 58eeb0016f5cc3644b4c6135f5a41274, type: 2}
 --- !u!1001 &2017048417
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7890,4 +7789,3 @@ SceneRoots:
   - {fileID: 427844312500361405}
   - {fileID: 1472637387}
   - {fileID: 2136397235}
-  - {fileID: 39348362}
